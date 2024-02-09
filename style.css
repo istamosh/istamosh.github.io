@@ -1,0 +1,48 @@
+body {
+    padding: 1% 30%;
+    background-color: rgb(238, 238, 238);
+}
+
+.wrapper h1, .wrapper a {
+    color: rgb(31, 27, 92);
+}
+.wrapper h1 {
+    text-shadow:
+        0px 1px 1px
+        rgba(255,255,255,0.75), 
+        0px -1px 1px rgba(0,0,0,.75);
+
+    text-align: center;
+}
+.wrapper a {
+    text-shadow:
+        0px 1px 1px
+        rgba(255,255,255,0.75);
+}
+.wrapper ul {
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-gap: 1em;
+
+    align-items: center;
+}
+.wrapper li {
+    list-style: none;
+    padding: 5px;
+}
+.wrapper a {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 730px) {
+    .wrapper h1 {
+        font-size: 1.6em;
+    }
+    .wrapper ul {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+    }
+}
