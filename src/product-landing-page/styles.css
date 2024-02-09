@@ -1,0 +1,205 @@
+:root {
+    --tea-palette1: rgb(244, 90, 2);
+    --tea-palette2: #582710;
+    --tea-palette3: #948785;
+    --tea-palette4: #9D7B61;
+    --tea-palette5: #DFDDE0;
+}
+
+body {
+    /* slide it down a bit */
+    padding-top: 60px;
+    font-family: 'Montserrat', sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana;
+    background-image: url('https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/herbal-tea-cup-wild-flowers-various-herbs-57374668.jpg');
+    background-attachment: fixed;
+    background-size: auto;
+}
+#header {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(90deg, white 20%, rgba(244, 90, 2, 0.75));
+    /* makes the logo and navlist spaced rightmost and leftmost */
+    justify-content: space-between;
+    /* navbar should always be at the top of the viewport < */
+    top: 0; left: 0;
+    position: fixed;
+    z-index: 1;
+    /* > */
+}
+#header-img {
+    padding: 5px;
+}
+/* #nav-bar {
+
+} */
+#nav-bar ul {
+    /* at least using one flexbox display < */
+    display: flex;
+    /* > */
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+#nav-bar ul li {
+    padding: 10px;
+    margin: 0 5px;
+}
+#nav-bar ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#main-section {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--tea-palette5);
+    border-radius: 8px;
+}
+
+#video-section {
+    /* want to apply flex for this subclass */
+    display: inherit;
+    flex-direction: inherit;
+    align-items: center;
+    /* using navlink pivot point method and add 8px as safety measures */
+    padding-top: calc(60px + 8px);
+    margin-top: calc(-30px - 8px);
+}
+#oolong-tea {
+    /* using navlink pivot point method and add 8px as safety measures */
+    padding-top: calc(60px + 8px);
+    margin-top: calc(-60px - 8px);
+}
+#benefits ul {
+    margin-bottom: 0;
+}
+#newsletter {
+    /* using navlink pivot point method and add 8px as safety measures */
+    padding-top: calc(60px + 8px);
+    margin-top: calc(-30px - 8px);
+}
+#video-section > p {
+    margin: 8px 0 0;
+    text-align: center;
+}
+#video-section a:visited {
+    color: unset;
+}
+#video {
+    max-width: 100%;
+    max-height: 360px;
+
+    width: max-content;
+    border-radius: 15px;
+}
+
+#main-section > article h1 {
+    text-align: center;
+    padding: 0 30px;
+}
+#main-section > article > p::first-letter {
+    color: var(--tea-palette1);
+}
+.image {
+    margin: 0 auto;
+    text-align: center;
+}
+.image img {
+    max-height: 200px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+#main-section h1, #main-section p {
+    text-shadow: 0px 1px 1px #FFFFFF;
+    color: #000000;
+}
+#main-section > article > p {
+    text-align: justify;
+    max-width: 640px;
+    margin: 0 auto;
+    /* R/L padding has minimum pixel when gets shrinked */
+    padding: 8px min(8px, 5%);
+}
+#main-section ul {
+    padding-left: 45px;
+    padding-right: min(8px, 5%);
+}
+
+#form {
+    text-align: center;
+    padding: 8px min(8px, 5%) 30px;
+}
+#email {
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 3px var(--tea-palette2);
+}
+#submit {
+    background: var(--tea-palette4);
+    color: white;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px #eee;
+    text-shadow: none;
+    padding: 8px;
+}
+#submit:hover {
+    background: var(--tea-palette2);
+    color: white;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px #eee;
+    text-shadow: none;
+    padding: 8px;
+}
+
+/* makes navbar appear nicely even on mobile */
+@media only screen and (max-width: 650px) {
+    body {
+        /* slide it down a bit */
+        padding-top: 117px;
+    }
+    #header {
+        /* banner size when shrinked */
+        height: 102px;
+        background: linear-gradient(90deg, white 50%, rgba(244, 90, 2, 0.75));
+        padding-bottom: 15px;
+        /* show bar when screen become narrow because of overflowing */
+        overflow-x: auto; overflow-y: hidden;
+    }
+    #header-img {
+        padding: 25px 25px 25px 5px;
+    }
+    #nav-bar ul {
+        flex-direction: column;
+        /* makes list right-aligned */
+        align-items: flex-end;
+        margin: 0;
+        /* prevent text wrapping after space key */
+        white-space: nowrap;
+        padding-right: 10px;
+    }
+    #nav-bar ul li {
+        padding: 8px;
+    }
+
+    #video-section {
+        /* using navlink pivot point method and add 8px as safety measures */
+        padding-top: calc(117px + 8px);
+        margin-top: calc(-87px - 8px);
+    }
+    #oolong-tea {
+        /* using navlink pivot point method and add 8px as safety measures */
+        padding-top: calc(117px + 8px);
+        margin-top: calc(-117px - 8px);
+    }
+    #newsletter {
+        /* using navlink pivot point method and add 8px as safety measures */
+        padding-top: calc(117px + 8px);
+        margin-top: calc(-117px - 8px);
+    }
+}

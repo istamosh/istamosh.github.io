@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Istea Store</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+<body>
+    <!-- act as a fixed pos. header bar -->
+    <header id="header">
+        <!-- product logo goes here -->
+        <img src="https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/istea_store.jpg" alt="Istea Store Logo" id="header-img">
+
+        <!-- navbar will stay besides the logo for every section of the page -->
+        <nav id="nav-bar">
+            <!-- nav-bar will contain at least three nav-link class elements -->
+            <ul>
+                <li><a class="nav-link" href="#video-section" rel="noopener noreferrer">Overview</a></li>
+                <li><a class="nav-link" href="#oolong-tea" rel="noopener noreferrer">Products</a></li>
+                <li><a class="nav-link" href="#newsletter" rel="noopener noreferrer">Try it!</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="main-section">
+        <!-- video about the product functionality, showcase, etc. -->
+        <div id="video-section">
+            <video 
+            controls 
+            id="video" 
+            src="https://github.com/istamosh/responsive-web-design/raw/master/product-landing-page/src/y2mate.com%20-%20Green%20Tea%20vs%20Black%20Tea%20vs%20Oolong%20Tea%20%203%20Different%20Tea%20Types%20Explained_480p.mp4" 
+            type="video/mp4">
+                Your browser does not support the video player.
+            </video>
+            <p><em>Video credits: <a href="https://www.youtube.com/@Nioteas" target="_blank">@Nioteas TV, YouTube</a></em></p>
+        </div>
+
+        <article id="intro">
+            <p>Are you a tea lover? even if you are not, we are here to offer our special blend of herbs that we grew 
+                on our own garden with an utmost care. We offer only the best herb quality with 
+                competitive yet affordable prices like no other would! 
+                Here are our tea collection.
+            </p>
+        </article>
+
+        <article id="oolong-tea">
+            <h1>Oolong Tea</h1>
+            
+            <div class="image">
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/280px-Oolong_tea_leaf.jpg" alt="oolong tea image">
+                <p>image source: Wikipedia</p>
+            </div>
+            
+            <p>
+                Oolong tea or "dark dragon" tea, is a traditional semi-oxidized Chinese tea (Camellia sinensis) produced through a process that includes withering the leaves under strong sun and allowing some oxidation to occur before curling and twisting. 
+                Oolong is especially popular in southeastern China and among ethnic Chinese in Southeast Asia, different styles of oolong tea can vary widely in flavor. They can be sweet and fruity with honey aromas, woody and thick with roasted aromas, or green and fresh with complex aromas, all depending on the horticulture and style of production. 
+            </p>
+        </article>
+
+        <article id="green-tea">      
+            <h1>Green Tea</h1>
+
+            <div class="image">
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/220px-Green_tea_3_appearances.jpg" alt="green tea image">
+                <p>image source: Wikipedia</p>
+            </div>
+
+            <p>
+                Green tea is a type of tea that is made from Camellia sinensis leaves and buds that have not undergone the same withering and oxidation process which is used to make oolong teas and black teas. Green tea originated in China, and since then its production and manufacture has spread to other countries in East Asia. 
+                Green tea is prepared by steaming and pan-frying the leaves and then drying them.
+            </p>
+        </article>
+
+        <article id="black-tea">
+            <h1>Black Tea</h1>
+
+            <div class="image">
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/black-tea-teatulia.jpg" alt="black tea image">
+                <p>image source: <a href="https://www.teatulia.com/tea-varieties/what-is-black-tea.htm">Teatulia</a></p>
+            </div>
+
+            <p>
+                Black tea also is called "red tea" is a type of tea that is more oxidized than oolong, yellow, white and green teas. Black tea is generally stronger in flavour than other teas. All five types are made from leaves of the shrub (or small tree) Camellia sinensis, though Camellia taliensis is also used rarely. 
+                While green tea usually loses its flavour within a year, black tea retains its flavour for several years.
+            </p>
+        </article>
+
+        <article id="benefits">
+            <h1>Here are the benefits of consuming a tea:</h1>
+            <ul>
+                <li>Full of antioxidants</li>
+                <li>Aids weight loss</li>
+                <li>Lower risk of Type 2 Diabetes</li>
+                <li>Supports the immune system</li>
+                <li>Lowers risk of a Stroke</li>
+                <li>Reduced risk of heart disease</li>
+                <li>Improves sleep quality</li>
+            </ul>
+        </article>
+
+        <article id="newsletter">
+            <h1>By subscribing to our newsletter, you are becoming a part of our exclusive tea community.</h1>
+            <p>You will get the benefits and perks such as our exclusive limited offer of above products, recipes, tips and tricks, 
+                invitations to special events, and even free samples and other fascinating merchandises!
+            </p>
+    
+            <!-- a customer form with mock address (for mailing subscription) -->
+            <form action="https://www.freecodecamp.com/email-submit" target="_blank" method="post" id="form">
+                <!-- customer email -->
+                <input type="email" name="email" id="email" placeholder="john_doe_123@gmail.com">
+    
+                <!-- the submit button -->
+                <input type="submit" value="Submit!" id="submit">
+            </form>
+        </article>
+    </section>
+</body>
+</html>

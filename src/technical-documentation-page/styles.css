@@ -1,0 +1,166 @@
+body {
+    font-family: 'Overpass Mono', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#navbar {
+    /* persistent even when scrolling */
+    position: fixed;
+    /* prevent display gap */
+    top: 0; left: 0;
+    /* background-color: rgb(220, 217, 243); */
+    width: 100%;
+    /* always display on top */
+    z-index: 1;
+} 
+header {
+    text-align: center;
+    font-weight: bold;
+}
+#navbar ul li {
+    list-style-type: none;
+}
+.nav-link {
+    /* set text color and remove underline */
+    color: rgb(85, 26, 139);
+    text-decoration: none;
+}
+
+.main-section header {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0), rgba(182, 180, 180, 0.2), rgba(0,0,0,0));
+}
+/* formatting codeblock and other smaller text tags */
+p > code, .main-section kbd, .main-section var {
+    background-color: rgb(243, 154, 199);
+    padding: 0 5px;
+}
+.main-section kbd {
+    font-weight:600;
+    background-color: turquoise;
+    font-size: 14px;
+}
+.main-section var {
+    font-size: unset;
+    background-color: lightblue;
+    padding: 0 4px 0 0;
+}
+.main-section pre {
+    /* white-space: pre-wrap; */
+    background-color: #eceaea;
+    color: #0c0d0e;
+    border-radius: 5px;
+    margin: 0;
+    padding: 15px 0 15px 20px;
+}
+.main-section code {
+    font-family: 'Cascadia Code', monospace;
+    font-size: 14px;
+    line-height: 150%;
+}
+.main-section a {
+    text-decoration: none;
+    color: rgb(36, 138, 255);
+}
+.main-section a:hover {
+    border-bottom: 2px solid;
+}
+.main-section a:active {
+    background-color: rgb(36, 138, 255);
+    color: white;
+}
+/* if max width 815px and below */
+@media only screen and (max-width: 815px) {
+    #navbar {
+        /* reserve spacing for horz. scrollbar */
+        height: 53px;
+        /* background-image: linear-gradient(180deg, rgb(220, 217, 243), rgb(220, 217, 243), rgb(220, 217, 243), rgb(220, 217, 243), rgba(240, 240, 240, 0)); */
+    }
+    #navbar header {
+        display: none;
+    }
+    /* display spaced list */
+    #navbar ul {
+        padding: 0;
+        display: flex;
+        /* vertical centering for list */
+        align-items: center;
+        /* justifying to prevent clipping on first list */
+        justify-content: space-between;
+        margin: 0;
+        /* makes flex height takes up parent spacing */
+        height: 100%;
+        /* add horz. scrollbar for nav if width not suitable */
+        overflow-x: auto;
+
+        background-image: linear-gradient(180deg, white, white, white, white, rgba(240, 240, 240, 0));
+        
+    }
+    #navbar li {
+        /* display list horizontally */
+        display: inline;
+        /* text-align: center; */
+        /* add padding between navbar buttons */
+        padding: 10px 8px 18px;
+
+        
+        
+        border-top: 5px solid rgb(139, 126, 219);
+        /* height: 100%; */
+    }
+    #main-doc {
+        /* makes margin spaces so they won't collide with fixed pos. navbar */
+        margin-top: calc(53px + 8px);
+    }
+    /* creating pivot point for nav href clicking */
+    .main-section {
+        padding-top: calc(53px + 8px);
+        margin-top: calc(-53px - 8px);
+    }
+
+    article pre {
+        /* spawn horz. scrollbar for codeblock */
+        overflow-x: auto;
+    }
+    article img {
+        /* keep aspect ratio even when shrinked */
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+        /* make centered image */
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width: 816px) {
+    #navbar {
+        /* takes 20% of screen width */
+        max-width: 20vw;
+        /* prevent static pixel height from <815 */
+        min-height: 100vh;
+        padding-top: 8px;
+        /* background-color: rgb(220, 217, 243); */
+        /* border-top: 3px solid rgba(255, 255, 255, 0.5); */
+    }
+
+    /* styling ul */
+    #navbar ul {
+        padding-left: 0;
+    }
+    #navbar ul li {
+        background-image: linear-gradient(90deg, rgb(220, 217, 243), rgb(220, 217, 243), rgb(220, 217, 243), rgb(220, 217, 243), rgba(240, 240, 240, 0));
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        border-left: 5px solid rgb(139, 126, 219);
+        padding: 5px 0 5px 6px;
+    }
+
+    #main-doc {
+        /* takes 80% of screen width */
+        max-width: 80vw;
+        /* padding space for navbar */
+        padding-left: 20vw;
+    }
+    .main-section {
+        padding-top: 8px;
+        margin-top: -8px;
+    }
+}

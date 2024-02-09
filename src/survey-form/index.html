@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+        <title>Testimonial and Survey Form</title>
+    </head>
+    <body>
+        <h1 id="title">Survey Form</h1>
+        <p id="description">We values your input to help improving the coding community</p>
+        
+        <form method="post" action="" id="survey-form">
+            <p id="caption">Tell us about yourself</p>
+            
+            <div class="biodata">
+                <label id="name-label" for="name">Name: <input type="text" name="name" id="name" required placeholder="example: John Doe"></label>
+                <label id="email-label" for="email">E-mail: <input type="email" name="email" id="email" required placeholder="example: john_doe@gmail.co.uk"></label>
+                <label id="number-label" for="number">Age: <input type="number" name="age" id="number" pattern="[0-9]" required placeholder="ex.: 20" min="10" max="100"></label>
+            </div>
+            
+            <p id="caption">Delve further into your personal goals</p>
+
+            <div class="dropdown">
+                <label for="dropdown">What kind of coding field you strived to be?
+                    <select name="dropdown" id="dropdown">
+                        <option value="1">Web</option>
+                        <option value="2">Mobile Application</option>
+                        <option value="3">Desktop Software</option>
+                        <option value="4">Data Scientist</option>
+                        <option value="5">AI/Machine Learning</option>
+                        <option value="6">Game</option>
+                        <option value="7">Security</option>
+                        <option value="8">Operating Systems</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="container">
+                <div class="radio">
+                    <p>How frequent you want us to inform you about our precious newsletters, new curriculums and certifications, or community projects?</p>
+                    
+                    <label for="daily"><input type="radio" name="radio-group" value="1" id="daily" checked> Daily</label>
+                    <label for="weekly"><input type="radio" name="radio-group" value="7" id="weekly"> Weekly</label>
+                    <label for="biweekly"><input type="radio" name="radio-group" value="14" id="biweekly"> Bi-weekly</label>
+                    <label for="monthly"><input type="radio" name="radio-group" value="30" id="monthly"> Monthly</label>
+                </div>
+    
+                <div class="checkbox">
+                    <p>What is your preferred learning sources?</p>
+    
+                    <label for="youtube"><input type="checkbox" value="youtube" checked> YouTube videos</label>
+                    <label for="teacher"><input type="checkbox" value="teacher"> Our professional teachers</label>
+                    <label for="project"><input type="checkbox" value="project"> From school, university, and community projects</label>
+                    <label for="web"><input type="checkbox" value="web"> Web tutorial and forums (w3, GfG, StackOverflow)</label>
+                    <label for="discord"><input type="checkbox" value="discord"> Discord servers</label>
+                    <label for="book"><input type="checkbox" value="book"> Books and literatures</label>
+                    <label for="other"><input type="checkbox" value="other"> Other source</label>
+                </div>
+            </div>
+            
+            <div class="textarea">
+                <label for="textarea">Tell us more about what aspects we should improve: 
+                    <textarea name="" id="" cols="30" rows="3" placeholder="Your experiences about products and features, problems and difficulties, suggestions, etc."></textarea>
+                </label>
+            </div>
+
+            <input type="submit" value="Submit your survey" id="submit">
+        </form>
+    </body>
+</html>
