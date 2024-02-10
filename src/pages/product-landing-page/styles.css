@@ -10,7 +10,7 @@ body {
     /* slide it down a bit */
     padding-top: 60px;
     font-family: 'Montserrat', sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana;
-    background-image: url('https://raw.githubusercontent.com/istamosh/responsive-web-design/master/product-landing-page/src/herbal-tea-cup-wild-flowers-various-herbs-57374668.jpg');
+    background-image: url('src/herbal-tea-cup-wild-flowers-various-herbs-57374668.jpg');
     background-attachment: fixed;
     background-size: auto;
 }

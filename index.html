@@ -3,44 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>listing Portfolio</title>
+    <title>My Portfolio</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Fira Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Crimson Text' rel='stylesheet'>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
 </head>
-<body>
-    <div class="wrapper">
-        <h1>Istamosh Project List</h1>
-
+<body class="dark-mode">
+    <nav id="navbar">
         <ul>
-            <li>
-                <a href="src/survey-form/index.html">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>Survey Form</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="src/tribute-page/index.html">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>Tribute Page</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="src/technical-documentation-page/index.html">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>Technical Documentation Page</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="src/product-landing-page/index.html">
-                    <i class="fa-solid fa-folder"></i>
-                    <span>Product Landing Page</span>
-                </a>
-            </li>
+            <li><a href="#welcome-section"><h2>About</h2></a></li>
+            <li><a href="#projects"><h2>Work</h2></a></li>
+            <li><a href="#contact"><h2>Contact</h2></a></li>
         </ul>
+    </nav>
+
+    <div class="main-section">
+        <section id="welcome-section" class="nav-direction">
+            <h1><span class="block smaller-font">Greetings,</span> I am <span class="blue">Alfian Ferdinan</span>.</h1>
+            <p>I do freelance work with Adobe Photoshop and designing a website.</p>
+            <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/experiment/personal-portfolio/src/headline-art.png" alt="">
+        </section>
+
+        <section id="projects" class="nav-direction">
+            <h3>These are some of the projects I have worked on</h3>
+            <!-- Project blocks -->
+            <div class="project-tile">
+                <p>Codeigniter4 framework-based bookstore with CRUD operations <a href="https://github.com/istamosh/ci4-duta-academy" target="_blank" rel="noopener noreferrer">here on my GitHub page.</a></p>
+                
+                <div class="carousel-container">
+                    <button onclick="slideRight(-1)">&#10094;</button>
+                    <div>
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-1.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-2.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-3.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-menucreate.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-menucreate2.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-created.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-menuupdate.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-updated.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-menudelete.jpg" alt="">
+                        <img loading="lazy" class="slide" loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/137649cc42357201a936fa301c321fb21f51cd0a/personal-portfolio/src/carousel/ci4-deleted.jpg" alt="">
+                    </div>
+                    <button onclick="slideRight(1)">&#10095;</button>
+                </div>
+            </div>
+
+            <div class="project-tile">
+                <p>My Project List Page</p>
+                <a 
+                id="project-list"
+                href="https://istamosh.github.io/" 
+                target="_blank" 
+                rel="noopener noreferrer">
+                    <img src="https://raw.githubusercontent.com/istamosh/responsive-web-design/experiment/personal-portfolio/src/carousel/collage.jpg" 
+                    alt="">
+                </a>
+            </div>
+        </section>
+
+        <section id="certificate">
+            <h3>My Certificates</h3>
+
+            <div>
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/experiment/personal-portfolio/src/certificate/20231225_CI4.jpg" alt="codeigniter 4">
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/experiment/personal-portfolio/src/certificate/20231208_Photoshop.jpg" alt="photoshop">
+                <img loading="lazy" src="https://raw.githubusercontent.com/istamosh/responsive-web-design/experiment/personal-portfolio/src/certificate/20230926_TOEFL_Prediction.jpg" alt="toefl prediction">
+            </div>
+        </section>
+
+        <section id="contact" class="nav-direction">
+            <div>
+                <a href="https://github.com/istamosh" id="profile-link" target="_blank"><i class="fa-brands fa-github"></i></i><span>GitHub</span></a>
+                <a href="mailto:alfianferdinan@gmail.com" id="profile-link" target="_blank"><i class="fa-solid fa-envelope"></i><span>Email</span></a>
+                <a href="https://www.instagram.com/istamosh/" id="profile-link" target="_blank"><i class="fa-brands fa-square-instagram"></i><span>Instagram</span></a>
+                <a href="https://www.facebook.com/dindu.nuffin.169/" id="profile-link" target="_blank"><i class="fa-brands fa-square-facebook"></i><span>Facebook</span></a>
+                <a href="https://www.linkedin.com/in/alfian-f-02a0032a9/" id="profile-link" target="_blank"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+            </div>
+        </section>
     </div>
+
+    <script>
+        // slideshow
+        var slideIndex = 1;
+        showImage(slideIndex);
+
+        function slideRight(n) {
+            showImage(slideIndex += n);
+        }
+
+        function showImage(n) {
+            var i;
+            var x = document.getElementsByClassName("slide");
+            if (n > x.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = x.length }
+            for (i = 0; i < x.length; i++) { x[i].style.display = "none"; }
+            x[slideIndex-1].style.display = "block";
+        }
+    </script>
 </body>
 </html>
