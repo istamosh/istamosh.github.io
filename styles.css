@@ -326,9 +326,6 @@ body {
     justify-content: center;
     align-items: stretch;
 
-    /* preserve space for image wrapping */
-    max-height: 800px;
-
     /* make child display proportional to the screen */
     width: 100%;
 }
