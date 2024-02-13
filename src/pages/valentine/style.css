@@ -111,13 +111,13 @@ h1:after {
 	 -ms-animation: closeRight 2s ease-in-out forwards;
 	 animation: closeRight 2s ease-in-out forwards;
 }
- #card:active #heart1 {
+ #card:hover #heart1 {
 	 -webkit-animation: openLeft 2s ease-in-out forwards;
 	 -moz-animation: openLeft 2s ease-in-out forwards;
 	 -ms-animation: openLeft 2 ease-in-out forwards;
 	 animation: openLeft 2s ease-in-out forwards;
 }
- #card:active #heart2 {
+ #card:hover #heart2 {
 	 -webkit-animation: openRight 2s ease-in-out forwards;
 	 -moz-animation: openRight 2s ease-in-out forwards;
 	 -ms-animation: openRight 2 ease-in-out forwards;
