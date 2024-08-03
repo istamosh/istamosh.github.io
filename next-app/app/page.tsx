@@ -10,7 +10,7 @@ export default function Home() {
       {/* accessing anchor tag link will re-request layout.css, webpack.js, main-app.js */}
       {/* this will impact performance */}
       {/* instead, use a Link tag */}
-      <Link href="/users">User's Page</Link>
+      <Link href="/users">User&apos;s Page</Link>
       <ProductCard />
     </main>
   );

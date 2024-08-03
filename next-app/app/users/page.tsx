@@ -15,9 +15,9 @@ const UsersPage = async () => {
   // fetching data is preffered in server side
 
   const res = await fetch("https://jsonplaceholder.typicode.com/users", {
-    // cache: 'no-store' => for data that changes frequently
+    // cache: 'no-store' => for data that changes frequently, thus making the route dynamic
     // next: {revalidate: 10} => get fresh data every 10s (only used in fetch func.)
-    next: { revalidate: 10 },
+    cache: "no-store",
   });
 
   // annotate const with interface
