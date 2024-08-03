@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// adding daisyUI for tailwind config after installing it
+// add theme provider
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,6 +17,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark", "night"],
+  },
 };
 export default config;

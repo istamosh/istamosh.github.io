@@ -1,0 +1,5 @@
+/* defining an object must use camelCase instead of dash */
+.cardContainer {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}

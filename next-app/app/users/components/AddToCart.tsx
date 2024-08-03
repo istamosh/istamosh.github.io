@@ -5,7 +5,11 @@ import React from "react";
 const AddToCart = () => {
   return (
     <div>
-      <button onClick={() => console.log("clicky clicky.")}>
+      {/* applying daisyUI button style */}
+      <button
+        className="btn btn-primary"
+        onClick={() => console.log("clicky clicky.")}
+      >
         Add To Cart!
       </button>
     </div>

@@ -8,6 +8,7 @@ import React from "react";
 interface User {
   id: number;
   name: string;
+  email: string;
 }
 
 const UsersPage = async () => {
@@ -25,14 +26,32 @@ const UsersPage = async () => {
 
   return (
     <>
-      <h1>Users:</h1>
-      <ul>
-        {users.map((user, i) => (
-          <li key={user.id}>
-            {i + 1}. {user.name}
-          </li>
-        ))}
-      </ul>
+      <h1>Users Table</h1>
+      <table className="table table-xs">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, i) => (
+            <tr key={user.id}>
+              <td>{i + 1}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </tfoot>
+      </table>
       {/* try to use dynamic rendering */}
       <p>Accessed at: {new Date().toLocaleTimeString()}</p>
     </>
