@@ -1,30 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./users/components/ProductCard";
+import NavigationBar from "./users/components/NavigationBar";
 
 export default function Home() {
   return (
     <main>
-      {/* <h1>Hello World!</h1> */}
+      <NavigationBar />
 
-      {/* accessing anchor tag link will re-request layout.css, webpack.js, main-app.js */}
-      {/* this will impact performance */}
-      {/* instead, use a Link tag */}
-      <Link href="/users">User&apos;s Page</Link>
-      <ProductCard />
-      <ProductCard />
-
-      <div id="navigation">
-        <ul>
-          <li>About</li>
-          <li>Work</li>
-          <li>Contact</li>
-        </ul>
+      <div
+        id="intro"
+        className="w-full h-[calc(100vh-68px)] bg-slate-800 flex items-center justify-between"
+      >
+        <div className="p-1">
+          <h1 className="px-4 py-2">Salutations! I'm Alfian Ferdinan</h1>
+          <p className="px-4">I design a website!</p>
+        </div>
+        <div className="grow text-center">Placeholder Photo</div>
       </div>
 
-      <div id="intro">
-        <h1>Salutations! I'm Alfian Ferdinan</h1>
-        <p>I design a website!</p>
+      <div id="showcase">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
+        molestias! Quisquam minima similique impedit alias consectetur voluptas
+        fugit pariatur eum cum maiores quo velit tenetur itaque, aperiam atque
+        iste ipsum.
       </div>
     </main>
   );
