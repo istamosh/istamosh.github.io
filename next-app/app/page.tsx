@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./users/components/ProductCard";
 import NavigationBar from "./users/components/NavigationBar";
+import ProjectCarousel from "./users/components/ProjectCarousel";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         className="snap-start w-full h-screen flex items-center justify-center"
       >
         <h1 className="font-sans text-9xl text-center">Projects Section</h1>
+        <ProjectCarousel />
       </div>
 
       <div
