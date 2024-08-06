@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const NavigationBar = () => {
@@ -9,7 +10,7 @@ const NavigationBar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>About</a>
+            <Link href="#contact-section">Contact</Link>
           </li>
           <li>
             <details>
