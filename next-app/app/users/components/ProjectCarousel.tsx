@@ -20,10 +20,16 @@ const ProjectCarousel = () => {
   };
   return (
     <div className="carousel w-[80vw] h-[50vh] rounded-2xl relative">
-      <div id="images" className="relative w-full h-full">
+      <div id="images" className="relative w-full h-full flex">
         <img
-          src={images[currentIndex]}
+          src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
           className="w-full h-full object-cover transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        />
+        <img
+          src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
+          className="w-full h-full object-cover transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         />
 
         <div
