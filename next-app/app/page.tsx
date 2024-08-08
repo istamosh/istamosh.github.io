@@ -23,7 +23,7 @@ export default function Home() {
 
       <div
         id="showcase-section"
-        className="snap-start w-full h-screen flex items-center justify-center"
+        className="snap-start w-full h-screen flex flex-col items-center justify-center"
       >
         <h1 className="font-sans text-9xl text-center">Projects Section</h1>
         <ProjectCarousel />
