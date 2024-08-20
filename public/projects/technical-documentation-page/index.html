@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Overpass Mono' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/cascadia-code" rel="stylesheet">
+    
+    <title>Git For Beginner - Documentation Page</title>
+</head>
+<body>
+    <nav id="navbar">
+        <header>Quick Navigation</header>
+
+        <ul>
+            <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+            <li><a href="#Setup" class="nav-link">Setup</a></li>
+            <li><a href="#Commands" class="nav-link">Commands</a></li>
+            <li><a href="#Environments" class="nav-link">Environments</a></li>
+            <li><a href="#Branches" class="nav-link">Branches</a></li>
+            <li><a href="#Syncing" class="nav-link">Syncing</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-doc">
+        <!-- SECTION ONE -->
+        <section class="main-section" id="Introduction">
+            <header>Introduction</header>
+
+            <article>
+                <p><strong>What is git?</strong> According to <a href="https://git-scm.com" target="_blank" rel="noopener noreferrer">git-scm website</a>, is a free and open-source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
+                <p>If I tell you more about other topics about git and its mechanism or features, you will be overwhelmed and afraid to continue, I will show you how to <a href="https://www.git-scm.com/downloads" target="_blank">download</a> and install git on your system instead.</p>
+                <p>I assumed you already downloaded the git, just open the installer and choose Next until the installation is finished. Then check if the installation exists by opening up Terminal (Linux and MacOS) or Command Prompt (Windows).</p>
+                
+                <ul>
+                    <li><strong>Windows:</strong> pressing <kbd>Win+R</kbd> button to open the "Run" window, then type <var>cmd</var> to open the Command Prompt window</li>
+                    <li><strong>MacOS:</strong> Applications > Utilites > Terminal</li>
+                    <li><strong>Linux:</strong> pressing the <kbd>CTRL+ALT+T</kbd> button to open the Terminal</li>
+                </ul>
+
+                <p>Type <code>git -v</code> and press Enter on your keyboard to check the installed git version.</p>
+            </article>
+        </section>
+
+        <!-- SECTION TWO -->
+        <section class="main-section" id="Setup">
+            <header>Setup</header>
+
+            <article>
+                <p>
+                    Using git can be done locally and remotely, initializing on a local environment is called a local repository,
+                    the repository is a whole git environment for your entire project that contains all your project files and directories.
+                </p>
+                <p>To use git right away, you need to make a git environment on a folder/directory. Initialize it by using these commands on your preferred Terminal:</p>
+
+                <pre><code>cd /path/to/project/directory
+git init</code></pre>
+    
+                <p>Creating an empty repository will generate these files and is recognized by git:</p>
+                <ul>
+                    <li><var>.git</var> directory, this file represents the local repository head file, by default this is hidden, if this file is modified or deleted, then this local repository is no longer recognized by git</li>
+                    <li><var>.gitignore</var> file, this is a file that excludes the file and directory listed inside here</li>
+                    <li><var>README.MD</var> file, this is a readme file that can be used on the GitHub repository landing page</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- SECTION THREE -->
+        <section class="main-section" id="Commands">
+            <header>Commands</header>
+
+            <article>
+                <p>To initialize the git repository until committing to the local repository (continuing from the Setup section), use these commands in order:</p>
+    
+                <pre><code>cd /path/to/project/directory
+git init
+git add .
+git commit</code></pre>
+    
+                <p>Here is the rundown of commands:</p>
+
+                <ul>
+                    <li>Head to your project directory</li>
+                    <li>Initialize an empty git repository</li>
+                    <li>Between these commands, you can work on your project by adding and editing files to be committed later as your project checkpoint</li>
+                    <li>Add all existing files (by using the "." sign) into the staging area</li>
+                    <li>Commit your staged files into your local git repository</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- SECTION FOUR -->
+        <section class="main-section" id="Environments">
+            <header>Environments</header>
+
+            <article>
+                <p>
+                    There are two environments of git, local and remote repository,
+                    <strong>local</strong> can be used for the local repository while <strong>remote</strong>
+                    is a hosted repository that can be accessed over the internet.
+                </p>
+                <p>Here are the advantages of a local repository:</p>
+    
+                <ul>
+                    <li>Can only be accessed locally such as LAN and above (except over the internet) so
+                        the repository is more private
+                    </li>
+                    <li>Removes the need for hosting</li>
+                    <li>Removes the need for an internet connection</li>
+                    <li>Avoid network issues</li>
+                    <li>Removes the need for backup files, acts as a save and checkpoint 
+                        in case of a messed up project, you can go back to the previous checkpoint
+                    </li>
+                </ul>
+
+                <p>Here are the advantages of a remote repository:</p>
+
+                <ul>
+                    <li>Easy cross-platform access to projects</li>
+                    <li>Enabling collaboration</li>
+                    <li>Project visibility</li>
+                </ul>
+
+                <img src="src/github-clone.jpg" alt="cloning the git repository">
+
+                <p>Let's assume you already made a git repository hosted on GitHub and copied the remote address
+                    like the above picture. Continuing from the last commit commands, 
+                    here is the command for pushing a local commit into a newly created 
+                    remote repository on GitHub as an example. Depending on your working branch name,
+                    in this case, it is on the "master" branch, so the commands are:
+                </p>
+
+                <pre><code>git remote add origin https://github.com/my-username/repository-name.git
+git push -u origin master</code></pre>
+
+                <p>Every time you are done on local commits and want to push your commits 
+                    into the GitHub remote repository you need to type this in Terminal:
+                </p>
+                
+                <pre><code>git push -u origin master</code></pre>
+            </article>
+        </section>
+
+        <!-- SECTION FIVE -->
+        <section class="main-section" id="Branches">
+            <header>Branches</header>
+
+            <article>
+                <p>Need to experiment with something or add a feature to your project and 
+                    don't want to mess up an existing project? git provides branching 
+                    for your needs, branching is done locally by using this command and 
+                    switching to your desired branch name:
+                </p>
+    
+                <pre><code>git checkout -b your-branch-name
+git checkout your-branch-name</code></pre>
+
+                <p>If you want to switch back to the <em>main</em> branch:</p>
+
+                <pre><code>git checkout main</code></pre>
+
+                <p>You might want to work on your project and make changes, then commit 
+                    your changes on the local branch, in case if you forget how to commit you can go <a href="#Commands">back to the Commands section.</a> 
+                    Then if you are done on the local branch and want to push into remote with that feature branch, 
+                    you can do this on Terminal:
+                </p>
+                
+                <pre><code>git push -u origin your-branch-name-same-as-local</code></pre>
+
+                <p>The code right before this is done one time only, 
+                    the next time you want to push your committed changes from the local branch 
+                    into the remote branch, you can do this instead:
+                </p>
+
+                <pre><code>git push</code></pre>
+
+                <p>
+                    Here are the benefits of branching:
+                </p>
+                
+                <ul>
+                    <li>Uninterrupted work and Commit action while collaborating with others</li>
+                    <li>Does not interrupt the main branch of the project, usually when it is live</li>
+                    <li>Easily track any changes and manage versions</li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- SECTION SIX -->
+        <section class="main-section" id="Syncing">
+            <header>Syncing</header>
+
+            <article>
+                <p>If you are working on a remote repository too and need to maintain 
+                    your local in sync with the remote, you need two commands called 
+                    git pull and push. But first, update your current local branch 
+                    so you know if your local branch is already in sync or behind 
+                    your remote branch, and check your status afterward.
+                </p>
+
+                <pre><code>git remote update
+git status</code></pre>
+
+                <p>
+                    These are the definitions of git pull and git push, so you know 
+                    what to do next.
+                </p>
+
+                <ul>
+                    <li><strong>Pull:</strong> an act of pulling updates from the remote into 
+                    your local repository, this happens if your local is behind your remote, 
+                    if you invoke this command and your local is already in sync, then the 
+                    message shows "already up to date"</li>
+                    <li><strong>Push:</strong> an act of pushing your local changes into remote, 
+                    will make a checkpoint of your local to remote, this happens every time you commit 
+                    your changes on your local project</li>
+                </ul>
+
+                <p>
+                    If your local branch commits are behind remote branch commits, do this command every time after the <code>git remote update</code>:
+                </p>
+
+                <pre><code>git pull</code></pre>
+
+                <p>If your local is ahead of remote (after the commit has been done), do this command every time you want to push your commit into remote:</p>
+
+                <pre><code>git push</code></pre>
+
+                <p>Now you can check your commit log by using this command (after that, quit by pressing <kbd>q</kbd> on your keyboard):</p>
+
+                <pre><code>git log --oneline</code></pre>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

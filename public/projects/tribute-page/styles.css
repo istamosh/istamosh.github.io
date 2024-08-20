@@ -1,0 +1,128 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+#main {
+    background-color: #ececec;
+    border-radius: 15px;
+    padding-bottom: 1px;
+}
+#title {
+    font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
+    padding: 15px 0 5px;
+    margin: 0;
+}
+h4 {
+    margin: 0 max(16px, 50% - 600px/2) 10px;
+    padding: 0 7px;
+}
+#img-div {
+    margin: 0 max(16px, 50% - 600px/2);
+    padding: 7px;
+    background-color: white;
+    box-shadow: 0px 7px 8px 0 rgba(0, 0, 0, 0.5);
+}
+#image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    filter: sepia(90%) brightness(140%);
+}
+#img-caption {
+    padding: 5px 0 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 80%;
+}
+#tribute-info {
+    margin: 20px 0 16px;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 0 16px;
+}
+.main-list {
+    margin-top: 0;
+    padding-inline-start: 0px;
+    text-align: left;
+}
+.no-bullets {
+    list-style: none;
+}
+.main-list>li {
+    padding-left: 60px;
+    text-indent: -60px;
+    margin: 12px 0;
+    line-height: 150%;
+}
+.main-list>li:first-of-type, .main-list>li:last-of-type {
+    margin: 0;
+}
+.main-list>li::after {
+    content: '.';
+}
+.year {
+    font-weight: bold;
+    text-align: right;
+    display: inline-block;
+    width: 55px;
+    padding-right: 5px;
+}
+.year::after {
+    content: ' -';
+}
+li a:visited {
+    color: inherit;
+}
+li a:active {
+    color: #ececec;
+    background-color: rgb(32, 32, 32);
+}
+.superscript {
+    font-size: 75%;
+    position: relative;
+    top: -4px;
+}
+.letterpress {
+    text-shadow: 0 1px 1px white;
+    color: rgb(32, 32, 32);
+}
+h2 {
+    padding: 0 16px;
+}
+#tribute-link {
+    text-decoration: none;
+    color: #39c;
+    background:
+    linear-gradient(
+      to right,
+      #39c,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(
+      to right,
+      #39c,
+      #39c
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms;
+}
+#tribute-link:visited {
+    color: #39c;
+}
+#tribute-link:hover {
+    background-size: 0 3px, 100% 3px;
+}
+#tribute-link:active {
+    background-color: #39c;
+    color: white;
+}
+.wiki {
+    color: #39c;
+}

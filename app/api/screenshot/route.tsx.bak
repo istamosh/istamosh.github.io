@@ -1,0 +1,57 @@
+// // Note: This route is only for development purposes to populate new public project folders automatically.
+
+// import { NextResponse } from "next/server";
+// import path from "path";
+// import puppeteer from "puppeteer";
+// import fs from "fs";
+
+// export const GET = async (req: Request) => {
+//   const { searchParams } = new URL(req.url);
+//   const url = searchParams.get("url");
+
+//   if (!url) {
+//     return NextResponse.json({ error: "url is required" }, { status: 400 });
+//   }
+
+//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+//   const screenshotDir = path.join(process.cwd(), "public", "screenshots");
+
+//   const filename = url.replace(/[^a-zA-Z0-9]/gi, "_").toLowerCase() + ".png";
+//   const filepath = path.join(screenshotDir, filename);
+
+//   if (fs.existsSync(filepath)) {
+//     return NextResponse.json({ image: `/screenshots/${filename}` });
+//   }
+
+//   try {
+//     if (!fs.existsSync(screenshotDir)) {
+//       fs.mkdirSync(screenshotDir, { recursive: true });
+//     }
+
+//     const browser = await puppeteer.launch({
+//       args: ["--no-sandbox", "--disable-setuid-sandbox"],
+//     });
+
+//     const page = await browser.newPage();
+//     await page.setViewport({ width: 1024, height: 768 });
+//     await page.goto(
+//       !/^https?:\/\//i.test(url)
+//         ? `${baseUrl}${url.replace("/public", "")}`
+//         : url,
+//       { waitUntil: "networkidle0" }
+//     );
+
+//     // starting from here if i want to take a screenshot and store it permanently later
+
+//     await page.screenshot({ path: filepath, fullPage: false });
+//     await browser.close();
+
+//     return NextResponse.json({ image: `/screenshots/${filename}` });
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json(
+//       { error: "Failed to generate screenshot" },
+//       { status: 500 }
+//     );
+//   }
+// };

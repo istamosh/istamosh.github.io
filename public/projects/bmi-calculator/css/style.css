@@ -1,0 +1,109 @@
+body {
+  font-family: "Rosario", sans-serif;
+}
+h1, h2 {
+  text-align: center;
+}
+
+/* selector berlaku untuk id form dan result-background */
+#form, #result-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1em;
+}
+
+#form {
+  background-color: #e0e7ff;
+  padding: 10px 0;
+  margin-bottom: 16px;
+}
+/* selector khusus input type number */
+input[type="number"] {
+  font-family: "Fragment Mono", sans-serif;
+  font-size: 16px;
+  padding: 5px 3px;
+  max-width: 130px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.buttons {
+  display: flex;
+}
+/* selector langsung dari class buttons hanya untuk input */
+.buttons > input {
+  margin: 15px 5px 0;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: "Rosario", sans-serif;
+  cursor: pointer;
+  background-color: #3b82f6;
+  color: white;
+
+  /* animasi untuk tombol yang berlaku pada property background-color */
+  /* dan transform (posisi elemen mengalami perubahan) */
+  /* dengan durasi 0.1 detik dan gaya animasi ease-in-out */
+  transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+.buttons > input:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+.buttons > input:active {
+  transform: translateY(1px);
+}
+
+#bmi {
+  font-family: "Francois One", sans-serif;
+  font-size: 3em;
+  margin: 0;
+}
+
+#result-background {
+  padding: 10px;
+}
+
+#range-bar {
+  margin: 0 15px 10px 0; 
+  text-align: end;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#love {
+  color: #f43f5e;
+  font-size: 30px;
+  margin: 0 5px;
+}
+
+/* kelas ini akan ditambahkan jika hasil muncul */
+.man {
+  background-color: #cffafe;
+}
+.woman {
+  background-color: #fce7f3;
+}
+
+/* didahulukan apabila layar kurang dari media query */
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 5vw;
+}
+/* media queries ini digunakan untuk membuat layout responsive */
+/* jika layar berukuran lebih besar dari 480px */
+/* maka layout akan berubah menjadi grid dengan 2 kolom */
+/* dengan lebar antara kolom 5% dari layar browser (viewport) */
+@media only screen and (min-width: 480px) {
+  .two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5vw;
+  }
+}
