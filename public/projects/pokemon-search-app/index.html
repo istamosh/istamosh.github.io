@@ -1,72 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <base href="/projects/pokemon-search-app/" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokemon Search App</title>
 
-    <link rel="stylesheet" href="styles.css">
-    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/pokemon.css' rel='stylesheet'>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://unpkg.com/css.gg@2.0.0/icons/css/pokemon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="main">
-        <div class="header">
-            <h1>Pokemon Search App</h1>
+      <div class="header">
+        <h1>Pokemon Search App</h1>
+      </div>
+
+      <div id="input-area">
+        <input
+          type="text"
+          id="search-input"
+          required
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="search-button">Find Pokemon!</button>
+      </div>
+
+      <div id="card-portrait">
+        <div class="card-back">
+          <div class="icon-container">
+            <i class="gg-pokemon"></i>
+          </div>
         </div>
 
-        <div id="input-area">
-            <input type="text" id="search-input" required autocomplete="off" spellcheck="false">
-            <button id="search-button">Find Pokemon!</button>
-        </div>
+        <marquee direction="left" id="name-section">
+          <div id="pokemon-name" class="b-font"></div>
+        </marquee>
 
-        <div id="card-portrait">
-            <div class="card-back">
-                <div class="icon-container">
-                    <i class="gg-pokemon"></i>
-                </div>
-            </div>
-        
-            <marquee direction="left" id="name-section">
-                <div id="pokemon-name" class="b-font"></div>
-            </marquee>
-            
-            <section id="energy-icons"></section>
+        <section id="energy-icons"></section>
 
-            <section id="id-section">
-                <span>&numero;.</span><div id="pokemon-id"></div>
-                <span>Weight:</span><div id="weight"></div>
-                <span>Height:</span><div id="height"></div>
-            </section>
-            
-            <div id="image"></div>
-            <div id="types"></div>
+        <section id="id-section">
+          <span>&numero;.</span>
+          <div id="pokemon-id"></div>
+          <span>Weight:</span>
+          <div id="weight"></div>
+          <span>Height:</span>
+          <div id="height"></div>
+        </section>
 
-            <section id="hp-section">
-                <span class="s-font">HP</span>
-                <div id="hp" class="b-font normal-weight"></div>
-                <i class="icon"></i>
-            </section>
+        <div id="image"></div>
+        <div id="types"></div>
 
-            <section id="attributes-section">
-                <section class="atk-section">
-                    <span>ATK</span><div id="attack" class="xl-font normal-weight"></div>
-                </section>
-                <section class="def-section">
-                    <span>DEF</span><div id="defense" class="xl-font normal-weight"></div>
-                </section>
-                <section class="satk-section">
-                    <span>SPC. ATK</span><div id="special-attack" class="xl-font normal-weight"></div>
-                </section>
-                <section class="sdef-section">
-                    <span>SPC. DEF</span><div id="special-defense" class="xl-font normal-weight"></div>
-                </section>
-                <section class="spd-section">
-                    <span>SPD</span><div id="speed" class="xl-font normal-weight"></div>
-                </section>
-            </section>
-        </div>
+        <section id="hp-section">
+          <span class="s-font">HP</span>
+          <div id="hp" class="b-font normal-weight"></div>
+          <i class="icon"></i>
+        </section>
+
+        <section id="attributes-section">
+          <section class="atk-section">
+            <span>ATK</span>
+            <div id="attack" class="xl-font normal-weight"></div>
+          </section>
+          <section class="def-section">
+            <span>DEF</span>
+            <div id="defense" class="xl-font normal-weight"></div>
+          </section>
+          <section class="satk-section">
+            <span>SPC. ATK</span>
+            <div id="special-attack" class="xl-font normal-weight"></div>
+          </section>
+          <section class="sdef-section">
+            <span>SPC. DEF</span>
+            <div id="special-defense" class="xl-font normal-weight"></div>
+          </section>
+          <section class="spd-section">
+            <span>SPD</span>
+            <div id="speed" class="xl-font normal-weight"></div>
+          </section>
+        </section>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

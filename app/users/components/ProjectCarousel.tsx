@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 export const ProjectCarousel = () => {
@@ -116,7 +115,7 @@ export const ProjectCarousel = () => {
       </h1>
       <div className="carousel w-[80vw] h-[50vh] rounded-2xl relative">
         {imageUrls.map((src, index) => (
-          <Link
+          <a
             key={index}
             href={projectUrls[index]}
             target="_blank"
@@ -132,7 +131,7 @@ export const ProjectCarousel = () => {
               alt={`Project ${index + 1}`}
               loading="lazy"
             />
-          </Link>
+          </a>
         ))}
 
         <div className="absolute inset-y-2/3 flex items-center justify-between w-full h-1/6 px-4">

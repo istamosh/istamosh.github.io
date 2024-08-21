@@ -51,6 +51,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
+          # match your node version with the package.json
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
@@ -78,7 +79,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          # your Next build directory
+          path: ./dist
 
   # Deployment job
   deploy:

@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <base href="/projects/palindrome-checker/" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Palindrome Checker Tool</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 
-    <link href='https://fonts.googleapis.com/css?family=PT Serif' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Oxygen Mono' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=PT Sans' rel='stylesheet'>
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css?family=PT Serif"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oxygen Mono"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=PT Sans"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div id="main">
-        <h1>Palindrome Checker</h1>
+      <h1>Palindrome Checker</h1>
 
-        <div id="input-section">
-            <input 
-            type="text" 
-            id="text-input" 
-            placeholder="Input here..." 
-            spellcheck="false" 
-            autocomplete="off"
-            required
-            >
-            <button type="button" id="check-btn">Check</button>
-            <button type="button" id="clear">Clear History</button>
-        </div>
-    
-        <div id="result">
-            
-        </div>
+      <div id="input-section">
+        <input
+          type="text"
+          id="text-input"
+          placeholder="Input here..."
+          spellcheck="false"
+          autocomplete="off"
+          required
+        />
+        <button type="button" id="check-btn">Check</button>
+        <button type="button" id="clear">Clear History</button>
+      </div>
 
-        <p id="info">A palindrome is a word, number, phrase, or other sequence of symbols that reads the same backwards as forwards, such as madam or racecar, the date and time 12/21/33 12:21, and the sentence: "A man, a plan, a canal – Panama".</p>
+      <div id="result"></div>
+
+      <p id="info">
+        A palindrome is a word, number, phrase, or other sequence of symbols
+        that reads the same backwards as forwards, such as madam or racecar, the
+        date and time 12/21/33 12:21, and the sentence: "A man, a plan, a canal
+        – Panama".
+      </p>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

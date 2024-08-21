@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <base href="/projects/cash-register/" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cash Register App</title>
 
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Merriweather Sans' rel='stylesheet'>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.cdnfonts.com/css/seven-segment"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Merriweather Sans"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <h1>Cash Register Simulation</h1>
 
     <div id="cash-in-register"></div>
@@ -18,12 +26,12 @@
     <p id="expected-change"></p>
 
     <div id="operable-area">
-        <input type="number" id="cash" autocomplete="off">
-        <button id="purchase-btn">Purchase</button>
+      <input type="number" id="cash" autocomplete="off" />
+      <button id="purchase-btn">Purchase</button>
     </div>
-    
+
     <div id="change-due"></div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
