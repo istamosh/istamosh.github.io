@@ -26,7 +26,7 @@ const SocialMedias = () => {
         {socials.map((social, i) => (
           <a
             key={i}
-            className="text-xl sm:text-5xl"
+            className="text-xl sm:text-5xl hover:animate-bounce"
             href={social.link}
             target="_blank"
           >
