@@ -26,6 +26,7 @@ export const ProjectCarousel = () => {
       const jsonData = await jsonResponse.json();
 
       const combinedUrls = [...(jsonData.urls || []), ...projectData];
+
       setProjectUrls(combinedUrls);
     } catch (error) {
       console.error("Error fetching project paths:", error);
@@ -33,80 +34,60 @@ export const ProjectCarousel = () => {
     setLoading(false);
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? imageUrls.length - 1 : prev - 1));
-  };
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === imageUrls.length - 1 ? 0 : prev + 1));
-  };
-
   useEffect(() => {
     fetchAllUrls();
   }, []);
+
   useEffect(() => {
-    // only use this API for development
     const takeScreenshotAPI = async () => {
       setLoading(true);
-      setImageUrls([]);
-      const promises = projectUrls.map(async (url) => {
-        try {
-          const response = await fetch(
-            `/api/screenshot?url=${encodeURIComponent(url)}`
-          );
-          const data = await response.json();
 
-          if (data.image) {
-            return data.image;
-          } else {
-            console.log(`Error fetching screenshot for ${url}:`, data.error);
-            return "";
-          }
-        } catch (error) {
-          console.log(`Error processing ${url}:`, error);
-          return "";
-        }
-      });
-      const results = await Promise.all(promises);
-      setImageUrls(results.filter((url) => url !== ""));
-      setLoading(false);
-    };
-    const fetchScreenshots = async () => {
-      setLoading(true);
-      setImageUrls([]);
-
-      // const baseUrl =
-      //   process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
       const promises = projectUrls.map(async (url) => {
         try {
           const filename =
             url.replace(/[^a-zA-Z0-9]/gi, "_").toLowerCase() + ".png";
-          // const imageUrl = `${baseUrl}/screenshots/${filename}`;
           const imageUrl = `/screenshots/${filename}`;
 
           const response = await fetch(imageUrl, { method: "HEAD" });
           if (response.ok) {
             return imageUrl;
           } else {
-            console.log(
-              `Error fetching screenshot for ${url}:`,
-              response.statusText
+            // call the route.tsx to take a screenshot
+            const screenshotResponse = await fetch(
+              `/api/screenshot?url=${encodeURIComponent(url)}`
             );
-            return "";
+
+            const data = await screenshotResponse.json();
+
+            if (data.image) {
+              return data.image;
+            } else {
+              console.log(
+                `Error fetching screenshot for ${url}:`,
+                data.error || data
+              );
+              return "";
+            }
           }
         } catch (error) {
           console.log(`Error processing ${url}:`, error);
           return "";
         }
       });
-
       const results = await Promise.all(promises);
       setImageUrls(results.filter((url) => url !== ""));
       setLoading(false);
     };
 
-    // takeScreenshotAPI();
-    fetchScreenshots();
+    takeScreenshotAPI();
   }, [projectUrls]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? imageUrls.length - 1 : prev - 1));
+  };
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === imageUrls.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <>

@@ -1,14 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import certificatePathUtil from "../../../utils/certificateArrayPopulator";
 import Image from "next/image";
-
-// interface ICertificateArray {
-//   default: {
-//     src: string;
-//   };
-// }
-// const certificatePaths: ICertificateArray[] = certificatePathUtil;
 
 const CertificateCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

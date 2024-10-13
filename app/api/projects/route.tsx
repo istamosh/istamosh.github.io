@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-export async function GET() {
+export const GET = async () => {
   const projectDir = path.join(process.cwd(), "public/projects/");
   const inputUrls: string[] = [];
 
@@ -17,4 +17,4 @@ export async function GET() {
   });
 
   return NextResponse.json(inputUrls);
-}
+};

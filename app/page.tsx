@@ -6,7 +6,7 @@ import Dashboard from "./users/components/Dashboard";
 
 export default function Home() {
   return (
-    <main className="max-h-screen snap-y overflow-y-scroll">
+    <main className="max-h-screen snap-y overflow-y-scroll smooth-scroll">
       <div id="header-wrapper" className="snap-start">
         <NavigationBar />
         <div
