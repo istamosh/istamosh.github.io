@@ -1,25 +1,26 @@
 import type { Config } from "tailwindcss";
+import daisyui from "daisyui";
 
-// adding daisyUI for tailwind config after installing it
-// add theme provider
-const config: Config = {
+export default {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+      },
+      screens: {
+        sh: { raw: "(min-height: 768px)" },
       },
     },
   },
-  plugins: [require("daisyui")],
+  darkMode: ["class", '[data-theme="night"]'],
+  plugins: [daisyui],
   daisyui: {
-    themes: ["light", "dark", "night"],
+    themes: ["light", "night"],
   },
-};
-export default config;
+} satisfies Config;
