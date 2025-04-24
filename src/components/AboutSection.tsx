@@ -10,6 +10,7 @@ import {
   Typescript,
 } from "./icons/SoftwareDevelopmentIcons";
 import Footer from "./Footer";
+import { Book, Briefcase, VideoCam } from "./icons/AboutMeIcons";
 
 const AboutSection: FC = () => {
   return (
@@ -24,32 +25,41 @@ const AboutSection: FC = () => {
         <span className="font-bold text-xl">
           I am open for opportunity while:
         </span>
-        <ul className="text-center sm:grid sm:grid-cols-3 sm:gap-x-8">
-          <li>
-            Currently working as a freelance graphic designer that dabbles in
-            Photoshop.
+        <ul className="sm:grid sm:grid-cols-3 sm:gap-x-8">
+          <li className="flex flex-col items-center">
+            <Briefcase className="fill-primary" />
+            <span>
+              Currently working as a freelance graphic designer that dabbles in
+              Photoshop.
+            </span>
           </li>
-          <li>
-            Enrolling as{" "}
-            <a
-              className="link link-hover link-primary"
-              href="https://journal.revou.co/kenalan-fsse/"
-              target="_blank"
-            >
-              RevoU FSSE
-            </a>{" "}
-            student.
+          <li className="flex flex-col items-center">
+            <Book className="fill-primary" />
+            <span>
+              Enrolling as{" "}
+              <a
+                className="link link-hover link-primary"
+                href="https://journal.revou.co/kenalan-fsse/"
+                target="_blank"
+              >
+                RevoU FSSE
+              </a>{" "}
+              student.
+            </span>
           </li>
-          <li>
-            Having a{" "}
-            <a
-              className="link link-hover link-primary"
-              href="https://www.youtube.com/@istamosh"
-              target="_blank"
-            >
-              Youtube channel
-            </a>{" "}
-            mostly about coding tutorial.
+          <li className="flex flex-col items-center">
+            <VideoCam className="fill-primary" />
+            <span>
+              Having a{" "}
+              <a
+                className="link link-hover link-primary"
+                href="https://www.youtube.com/@istamosh"
+                target="_blank"
+              >
+                Youtube channel
+              </a>{" "}
+              mostly about coding tutorial.
+            </span>
           </li>
         </ul>
       </div>

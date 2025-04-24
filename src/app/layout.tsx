@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Ropa_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ReactLenis } from "@/utils/lenis";
 
 const ropaSans = Ropa_Sans({
   variable: "--font-ropa-sans",
@@ -28,7 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${ropaSans.variable} ${syne.variable} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ReactLenis root>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReactLenis>
       </body>
     </html>
   );
