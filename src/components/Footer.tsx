@@ -5,7 +5,7 @@ const Footer: FC = () => {
   return (
     <>
       <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-        <nav className="grid grid-flow-col gap-4">
+        <nav className="grid grid-cols-2 sm:grid-cols-5 gap-4">
           {externalLinks.map((link, i) => (
             <a
               key={i}

@@ -12,6 +12,10 @@ export const externalLinks = [
     title: "FreeCodeCamp",
   },
   {
+    link: "https://codepen.io/istamosh/pens/public",
+    title: "Codepen",
+  },
+  {
     link: "https://github.com/istamosh",
     title: "GitHub Account 1",
   },
