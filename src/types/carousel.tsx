@@ -3,5 +3,6 @@ export type CarouselSlide = {
   image: string;
   title: string;
   description: string;
-  link: string;
+  projectLink?: string;
+  githubLink: string;
 };
