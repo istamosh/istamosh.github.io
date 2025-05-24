@@ -31,10 +31,8 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
-      // Store the token in localStorage
-      localStorage.setItem("access_token", data.access_token);
-      
-      // Redirect to home page after successful login
+      // The token will be automatically stored in an HTTP-only cookie by the server
+      // Just redirect to home page after successful login
       router.push("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

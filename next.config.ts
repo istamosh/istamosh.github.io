@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         destination:
           // "https://deployment.com/api/:path*",
-        "http://localhost:5000/api/:path*",
+        "http://192.168.100.6:5000/api/:path*",
       },
     ];
   }
