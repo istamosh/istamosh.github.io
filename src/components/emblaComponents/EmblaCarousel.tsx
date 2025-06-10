@@ -56,30 +56,32 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           {slides.map((slide) => (
             <div className="embla__slide" key={slide.id}>
               <div className="embla__slide__number">
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 p-4">
-                  <div className="w-full sm:w-1/2 flex-shrink-0 h-[20vh] sm:h-full flex items-center justify-center">
-                    <img
-                      src={slide.image}
-                      alt={slide.title}
-                      width={400}
-                      height={300}
-                      className="embla__slide__img max-h-[15vh] sm:max-h-full w-auto max-w-[80%] h-auto object-contain rounded-lg shadow-md"
-                    />
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 p-4 max-w-5xl mx-auto">
+                  <div className="w-full sm:w-1/2 flex-shrink-0 h-[20vh] sm:h-auto flex items-center justify-center sm:justify-start">
+                    <div className="w-full max-w-md flex items-center justify-center">
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        width={400}
+                        height={300}
+                        className="embla__slide__img max-h-[15vh] sm:max-h-[300px] w-auto max-w-[80%] sm:max-w-full h-auto object-contain rounded-lg shadow-md"
+                      />
+                    </div>
                   </div>
-                  <div className="embla__slide__text w-full sm:w-1/2 flex flex-col justify-between">
-                    <div className="space-y-1.5">
+                  <div className="embla__slide__text w-full sm:w-1/2 flex flex-col sm:py-4">
+                    <div className="space-y-2">
                       <h3
                         className={`text-xl sm:text-2xl font-bold ${pt_sans.className}`}
                       >
                         {slide.title}
                       </h3>
                       <p
-                        className={`text-sm sm:text-base font-normal ${pt_sans.className} leading-snug`}
+                        className={`text-sm sm:text-base font-normal ${pt_sans.className} leading-snug opacity-90`}
                       >
                         {truncateText(slide.description, 150)}
                       </p>
                     </div>
-                    <div className="flex flex-wrap gap-2 sm:gap-3 mt-4">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
                       {slide.projectLink && (
                         <a
                           href={slide.projectLink}
