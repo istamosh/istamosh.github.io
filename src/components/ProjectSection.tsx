@@ -8,8 +8,8 @@ import { pt_sans } from "@/app/fonts";
 
 const OPTIONS: EmblaOptionsType = {
   axis: "y",
-  dragFree: true,
-  direction: "rtl",
+  dragFree: false,
+  containScroll: "keepSnaps",
   loop: true,
 };
 
