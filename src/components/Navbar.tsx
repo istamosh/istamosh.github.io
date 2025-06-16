@@ -13,18 +13,15 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Desktop and mobile top bar */}
+      {/* Desktop-only top bar - completely hidden on mobile */}
       <div
-        className={`sticky top-0 -mt-12 z-10 w-full bg-gradient-to-r from-transparent from-5% backdrop-blur-sm ${
+        className={`hidden sm:block sticky top-0 -mt-12 z-10 w-full bg-gradient-to-r from-transparent from-5% backdrop-blur-sm ${
           theme === "light" ? "via-blue-500/40" : "via-primary/15"
         } via-50% to-transparent to-95%`}
       >
         <div className="flex flex-row justify-center items-center py-2">
-          {/* Hide mobile button from top bar */}
-          <div className="sm:hidden"></div>
-
-          {/* Desktop navigation - unchanged */}
-          <nav className="hidden sm:flex sm:gap-x-8">
+          {/* Desktop navigation */}
+          <nav className="flex gap-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -40,8 +37,8 @@ const Navbar = () => {
             ))}
           </nav>
 
-          {/* Theme toggle - keep for desktop, hide on mobile */}
-          <div className="absolute top-0 right-4 hidden sm:block">
+          {/* Theme toggle for desktop */}
+          <div className="absolute top-0 right-4">
             <ThemeToggle />
           </div>
         </div>
