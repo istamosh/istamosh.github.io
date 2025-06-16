@@ -126,7 +126,7 @@ const HeroSection: FC = () => {
 
   return (
     <>
-      <div className="w-full h-screen bg-slate-900 relative flex" id="hero">
+      <div className="w-full min-h-screen bg-slate-900 relative flex" id="hero">
         <canvas ref={canvasRef} className="w-full h-full absolute" />
         <img
           src="/portfolio-page-hero-transparent.webp"

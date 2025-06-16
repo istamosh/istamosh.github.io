@@ -12,7 +12,7 @@ const SectionContainer: FC<ContainerProps> = ({
   fullHeight = true,
   ...props
 }) => {
-  const heightClass = fullHeight ? "h-screen" : "min-h-fit";
+  const heightClass = fullHeight ? "min-h-screen" : "min-h-fit";
   
   return (
     <div className={`pt-10 px-4 w-full ${heightClass} ${className}`} {...props}>
