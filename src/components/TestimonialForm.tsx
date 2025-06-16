@@ -6,39 +6,53 @@ import * as Yup from 'yup';
 import { pt_sans } from "@/app/fonts";
 import axios, { AxiosError } from 'axios';
 
+interface TestimonialFormProps {
+  onSuccess?: () => void;
+}
+
 interface TestimonialFormValues {
-  nameOrEmail: string;
-  linkedinUrl: string;
+  first_name: string;
+  last_name: string;
+  role_company: string;
   testimonial: string;
+  censor_first_name: boolean;
+  censor_last_name: boolean;
+  consent_given: boolean;
 }
 
 const validationSchema = Yup.object({
-  nameOrEmail: Yup.string()
-    .required('Required')
-    .min(3, 'Must be at least 3 characters'),
-  linkedinUrl: Yup.string()
-    .url('Must be a valid URL')
-    .required('Required')
-    .matches(
-      /^https?:\/\/(www\.)?linkedin\.com\/.*/i,
-      'Must be a valid LinkedIn URL'
-    ),
+  first_name: Yup.string()
+    .required('First name is required')
+    .min(2, 'Must be at least 2 characters')
+    .max(60, 'Must not exceed 60 characters'),
+  last_name: Yup.string()
+    .required('Last name is required')
+    .min(2, 'Must be at least 2 characters')
+    .max(60, 'Must not exceed 60 characters'),
+  role_company: Yup.string()
+    .max(120, 'Must not exceed 120 characters'),
   testimonial: Yup.string()
-    .required('Required')
+    .required('Testimonial is required')
     .min(10, 'Must be at least 10 characters')
-    .max(500, 'Must not exceed 500 characters'),
+    .max(1000, 'Must not exceed 1000 characters'),
+  consent_given: Yup.boolean()
+    .oneOf([true], 'You must consent to share your testimonial'),
 });
 
-const TestimonialForm: React.FC = () => {
+const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
 
   const initialValues: TestimonialFormValues = {
-    nameOrEmail: '',
-    linkedinUrl: '',
+    first_name: '',
+    last_name: '',
+    role_company: '',
     testimonial: '',
+    censor_first_name: false,
+    censor_last_name: false,
+    consent_given: false,
   };
 
   const handleSubmit = async (
@@ -51,9 +65,14 @@ const TestimonialForm: React.FC = () => {
       if (response.status === 201 || response.status === 200) {
         setSubmitStatus({
           type: 'success',
-          message: 'Thank you for your testimonial!'
+          message: 'Thank you for your testimonial! It will be reviewed before being published.'
         });
         resetForm();
+        
+        // Call onSuccess callback after a short delay to show the success message
+        setTimeout(() => {
+          onSuccess?.();
+        }, 2000);
       }
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
@@ -78,52 +97,75 @@ const TestimonialForm: React.FC = () => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form className="space-y-4 w-full max-w-md">
+        <Form className="space-y-3 w-full">
           {submitStatus.type && (
-            <div className={`alert ${submitStatus.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+            <div className={`alert ${submitStatus.type === 'success' ? 'alert-success' : 'alert-error'} mb-4`}>
               <span>{submitStatus.message}</span>
             </div>
           )}
 
-          <div>
-            <label
-              htmlFor="nameOrEmail"
-              className={`block text-sm font-medium mb-1 ${pt_sans.className}`}
-            >
-              Name or Email
-            </label>
-            <Field
-              type="text"
-              id="nameOrEmail"
-              name="nameOrEmail"
-              className="input input-bordered w-full"
-              placeholder="Enter your name or email"
-            />
-            <ErrorMessage
-              name="nameOrEmail"
-              component="div"
-              className="text-error text-sm mt-1"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label
+                htmlFor="first_name"
+                className={`block text-sm font-medium mb-1 ${pt_sans.className}`}
+              >
+                First Name
+              </label>
+              <Field
+                type="text"
+                id="first_name"
+                name="first_name"
+                className="input input-bordered w-full input-sm"
+                placeholder="Your first name"
+              />
+              <ErrorMessage
+                name="first_name"
+                component="div"
+                className="text-error text-xs mt-1"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="last_name"
+                className={`block text-sm font-medium mb-1 ${pt_sans.className}`}
+              >
+                Last Name
+              </label>
+              <Field
+                type="text"
+                id="last_name"
+                name="last_name"
+                className="input input-bordered w-full input-sm"
+                placeholder="Your last name"
+              />
+              <ErrorMessage
+                name="last_name"
+                component="div"
+                className="text-xs text-error mt-1"
+              />
+            </div>
           </div>
 
           <div>
             <label
-              htmlFor="linkedinUrl"
+              htmlFor="role_company"
               className={`block text-sm font-medium mb-1 ${pt_sans.className}`}
             >
-              LinkedIn URL
+              Role & Company <span className="text-xs text-gray-500">(Optional)</span>
             </label>
             <Field
-              type="url"
-              id="linkedinUrl"
-              name="linkedinUrl"
-              className="input input-bordered w-full"
-              placeholder="https://linkedin.com/in/your-profile"
+              type="text"
+              id="role_company"
+              name="role_company"
+              className="input input-bordered w-full input-sm"
+              placeholder="e.g., Senior Developer at ABC Corp"
             />
             <ErrorMessage
-              name="linkedinUrl"
+              name="role_company"
               component="div"
-              className="text-error text-sm mt-1"
+              className="text-error text-xs mt-1"
             />
           </div>
 
@@ -138,20 +180,65 @@ const TestimonialForm: React.FC = () => {
               as="textarea"
               id="testimonial"
               name="testimonial"
-              className="textarea textarea-bordered w-full h-32"
-              placeholder="Share your experience..."
+              className="textarea textarea-bordered w-full h-24"
+              placeholder="Share your experience working with me..."
             />
             <ErrorMessage
               name="testimonial"
               component="div"
-              className="text-error text-sm mt-1"
+              className="text-error text-xs mt-1"
             />
+          </div>
+
+          <div className="space-y-2">
+            <div className="text-sm font-medium">Privacy Options</div>
+            
+            <div className="form-control">
+              <label className="label cursor-pointer py-1">
+                <span className="label-text text-sm">Hide my first name (show as "A****")</span>
+                <Field
+                  type="checkbox"
+                  name="censor_first_name"
+                  className="checkbox checkbox-primary checkbox-sm"
+                />
+              </label>
+            </div>
+
+            <div className="form-control">
+              <label className="label cursor-pointer py-1">
+                <span className="label-text text-sm">Hide my last name (show as "S****")</span>
+                <Field
+                  type="checkbox"
+                  name="censor_last_name"
+                  className="checkbox checkbox-primary checkbox-sm"
+                />
+              </label>
+            </div>
+
+            <div className="form-control">
+              <label className="label cursor-pointer py-1">
+                <span className="label-text text-sm">
+                  I consent to my testimonial being displayed publicly on this website
+                  <span className="text-error"> *</span>
+                </span>
+                <Field
+                  type="checkbox"
+                  name="consent_given"
+                  className="checkbox checkbox-primary checkbox-sm"
+                />
+              </label>
+              <ErrorMessage
+                name="consent_given"
+                component="div"
+                className="text-error text-xs mt-1"
+              />
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn btn-primary w-full"
+            className="btn btn-primary w-full mt-4"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Testimonial'}
           </button>
