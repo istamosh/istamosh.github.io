@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { pt_sans } from "@/app/fonts";
 import axios, { AxiosError } from 'axios';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 interface TestimonialFormProps {
   onSuccess?: () => void;
@@ -44,6 +45,9 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+  
+  const [recaptchaToken, setRecaptchaToken] = useState<string>('');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const initialValues: TestimonialFormValues = {
     first_name: '',
@@ -57,8 +61,21 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
 
   const handleSubmit = async (
     values: TestimonialFormValues,
-    { resetForm, setSubmitting }: { resetForm: () => void; setSubmitting: (isSubmitting: boolean) => void }
+    { resetForm, setSubmitting }: { 
+      resetForm: () => void; 
+      setSubmitting: (isSubmitting: boolean) => void;
+    }
   ) => {
+    // Check if reCAPTCHA is completed
+    if (!recaptchaToken) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please complete the reCAPTCHA verification before submitting.'
+      });
+      setSubmitting(false);
+      return;
+    }
+
     try {
       const response = await axios.post('/api/testimonial', values);
       
@@ -68,6 +85,12 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
           message: 'Thank you for your testimonial! It will be reviewed before being published.'
         });
         resetForm();
+        
+        // Reset reCAPTCHA
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+          setRecaptchaToken('');
+        }
         
         // Call onSuccess callback after a short delay to show the success message
         setTimeout(() => {
@@ -80,6 +103,12 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
         type: 'error',
         message: axiosError.response?.data?.message || 'Failed to submit testimonial. Please try again.'
       });
+      
+      // Reset reCAPTCHA on error
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+        setRecaptchaToken('');
+      }
     } finally {
       setSubmitting(false);
 
@@ -232,6 +261,30 @@ const TestimonialForm: React.FC<TestimonialFormProps> = ({ onSuccess }) => {
                 component="div"
                 className="text-error text-xs mt-1"
               />
+            </div>
+          </div>
+
+          {/* reCAPTCHA */}
+          <div className="flex justify-center my-4">
+            <div>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+                onChange={(token) => {
+                  setRecaptchaToken(token || '');
+                }}
+                onExpired={() => {
+                  setRecaptchaToken('');
+                }}
+                onError={() => {
+                  setRecaptchaToken('');
+                }}
+              />
+              {!recaptchaToken && submitStatus.type === 'error' && submitStatus.message.includes('reCAPTCHA') && (
+                <div className="text-error text-xs mt-1 text-center">
+                  Please complete the reCAPTCHA verification
+                </div>
+              )}
             </div>
           </div>
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-google-recaptcha": "^2.1.9",
     "@types/yup": "^0.29.14",
     "axios": "^1.9.0",
     "embla-carousel": "^8.6.0",
@@ -19,6 +20,7 @@
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-google-recaptcha": "^3.1.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
