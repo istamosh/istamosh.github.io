@@ -49,7 +49,7 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const updateTestimonialStatus = async (id: number, status: 'APPROVED' | 'REJECTED') => {
+  const updateTestimonialStatus = async (id: number, status: 'APPROVED' | 'REJECTED' | 'PENDING') => {
     try {
       await axios.patch(`/api/admin/testimonials/${id}`, { status });
       
@@ -182,6 +182,40 @@ export default function AdminDashboardPage() {
                           className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm font-medium"
                         >
                           Reject
+                        </button>
+                      </div>
+                    )}
+                    
+                    {testimonial.status === 'APPROVED' && (
+                      <div className="ml-6 flex space-x-2">
+                        <button
+                          onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
+                          className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Retract to Pending
+                        </button>
+                        <button
+                          onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
+                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    )}
+                    
+                    {testimonial.status === 'REJECTED' && (
+                      <div className="ml-6 flex space-x-2">
+                        <button
+                          onClick={() => updateTestimonialStatus(testimonial.id, 'APPROVED')}
+                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
+                          className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md text-sm font-medium"
+                        >
+                          Move to Pending
                         </button>
                       </div>
                     )}
