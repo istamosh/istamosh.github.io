@@ -10,6 +10,7 @@ interface ApprovedTestimonial {
   id: number;
   name: string;
   role_company: string;
+  profile_link: string;
   testimonial: string;
   created_at: string;
 }
@@ -105,9 +106,20 @@ const TestimonialSection: React.FC = () => {
                   </blockquote>
                   <div className="card-actions justify-end">
                     <div className="text-right">
-                      <p className="font-semibold text-base-content">
-                        {testimonial.name}
-                      </p>
+                      {testimonial.profile_link ? (
+                        <a
+                          href={testimonial.profile_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-primary hover:text-primary-focus transition-colors duration-200 cursor-pointer"
+                        >
+                          {testimonial.name}
+                        </a>
+                      ) : (
+                        <p className="font-semibold text-base-content">
+                          {testimonial.name}
+                        </p>
+                      )}
                       {testimonial.role_company && (
                         <p className="text-sm text-base-content/70">
                           {testimonial.role_company}
