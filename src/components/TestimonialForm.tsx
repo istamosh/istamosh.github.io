@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { pt_sans } from "@/app/fonts";
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError } from '@/utils/axios';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 interface TestimonialFormProps {

@@ -4,12 +4,39 @@ import React, { useState, useEffect } from 'react';
 import SectionContainer from './SectionContainer';
 import { pt_sans } from '@/app/fonts';
 import TestimonialForm from './TestimonialForm';
+import axios from '@/utils/axios';
+
+interface ApprovedTestimonial {
+  id: number;
+  name: string;
+  role_company: string;
+  testimonial: string;
+  created_at: string;
+}
 
 const TestimonialSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [approvedTestimonials, setApprovedTestimonials] = useState<ApprovedTestimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  // Fetch approved testimonials
+  useEffect(() => {
+    const fetchApprovedTestimonials = async () => {
+      try {
+        const response = await axios.get('/api/admin/testimonials/approved');
+        setApprovedTestimonials(response.data);
+      } catch (error) {
+        console.error('Error fetching approved testimonials:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchApprovedTestimonials();
+  }, []);
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -52,11 +79,50 @@ const TestimonialSection: React.FC = () => {
         Add Your Testimonial
       </button>
 
-      {/* TODO: Add testimonials display section here */}
-      <div className="w-full max-w-4xl py-8">
-        <p className="text-center text-base-content/70">
-          No testimonials yet. Be the first to share your experience!
-        </p>
+      {/* Approved Testimonials Display */}
+      <div className="w-full max-w-6xl py-8">
+        {isLoading ? (
+          <div className="text-center">
+            <span className="loading loading-spinner loading-md"></span>
+            <p className="mt-2 text-base-content/70">Loading testimonials...</p>
+          </div>
+        ) : approvedTestimonials.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-base-content/70 text-lg">
+              No testimonials yet. Be the first to share your experience!
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {approvedTestimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="card-body">
+                  <blockquote className="text-base-content/90 italic mb-4">
+                    "{testimonial.testimonial}"
+                  </blockquote>
+                  <div className="card-actions justify-end">
+                    <div className="text-right">
+                      <p className="font-semibold text-base-content">
+                        {testimonial.name}
+                      </p>
+                      {testimonial.role_company && (
+                        <p className="text-sm text-base-content/70">
+                          {testimonial.role_company}
+                        </p>
+                      )}
+                      <p className="text-xs text-base-content/50 mt-1">
+                        {new Date(testimonial.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Modal Dialog */}
