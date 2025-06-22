@@ -5,21 +5,16 @@ import SectionContainer from './SectionContainer';
 import { pt_sans } from '@/app/fonts';
 import TestimonialForm from './TestimonialForm';
 import axios from '@/utils/axios';
-
-interface ApprovedTestimonial {
-  id: number;
-  name: string;
-  role_company: string;
-  profile_link: string;
-  testimonial: string;
-  created_at: string;
-}
+import { Language, getTranslation } from '@/utils/i18n';
+import { ApprovedTestimonial } from '@/types/testimonial';
 
 const TestimonialSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [approvedTestimonials, setApprovedTestimonials] = useState<ApprovedTestimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [language, setLanguage] = useState<Language>('en');
 
+  const t = getTranslation(language);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -59,9 +54,7 @@ const TestimonialSection: React.FC = () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen]);
-
-  return (
+  }, [isModalOpen]);  return (
     <SectionContainer
       id="testimonials"
       className="flex flex-col items-center gap-y-4 border-b-4 border-base-300 pb-10"
@@ -70,14 +63,14 @@ const TestimonialSection: React.FC = () => {
       <h1
         className={`text-center sm:font-bold text-5xl lg:text-6xl 2xl:text-9xl ${pt_sans.className}`}
       >
-        Testimonials
+        {t.testimonialsTitle}
       </h1>
-
+      
       <button
         onClick={openModal}
         className="btn btn-primary"
       >
-        Add Your Testimonial
+        {t.addYourTestimonial}
       </button>
 
       {/* Approved Testimonials Display */}
@@ -85,12 +78,12 @@ const TestimonialSection: React.FC = () => {
         {isLoading ? (
           <div className="text-center">
             <span className="loading loading-spinner loading-md"></span>
-            <p className="mt-2 text-base-content/70">Loading testimonials...</p>
+            <p className="mt-2 text-base-content/70">{t.loadingTestimonials}</p>
           </div>
         ) : approvedTestimonials.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-base-content/70 text-lg">
-              No testimonials yet. Be the first to share your experience!
+              {t.noTestimonials}
             </p>
           </div>
         ) : (
@@ -102,7 +95,7 @@ const TestimonialSection: React.FC = () => {
               >
                 <div className="card-body">
                   <blockquote className="text-base-content/90 italic mb-4">
-                    "{testimonial.testimonial}"
+                    &ldquo;{testimonial.testimonial}&rdquo;
                   </blockquote>
                   <div className="card-actions justify-end">
                     <div className="text-right">
@@ -141,20 +134,66 @@ const TestimonialSection: React.FC = () => {
       {isModalOpen && (
         <div className="modal modal-open">
           <div className="modal-box w-11/12 max-w-2xl">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className={`text-2xl font-bold ${pt_sans.className}`}>
-                Share Your Experience
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <h2 className={`text-xl sm:text-2xl font-bold ${pt_sans.className}`}>
+                {t.modalTitle}
               </h2>
-              <button
-                onClick={closeModal}
-                className="btn btn-ghost btn-sm btn-circle"
-                aria-label="Close modal"
-              >
-                ✕
-              </button>
+              
+              {/* Mobile-first Language Switcher */}
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="flex items-center gap-2 flex-1 sm:flex-initial">
+                  <span className="text-sm font-medium text-base-content/70 whitespace-nowrap">
+                    {t.language}:
+                  </span>
+                  <div className="join join-horizontal bg-base-200 rounded-lg p-1">
+                    <label className="join-item">
+                      <input
+                        type="radio"
+                        name="language"
+                        value="en"
+                        checked={language === 'en'}
+                        onChange={(e) => setLanguage(e.target.value as Language)}
+                        className="sr-only"
+                      />
+                      <span className={`px-3 py-1 text-xs sm:text-sm rounded cursor-pointer transition-all duration-200 ${
+                        language === 'en' 
+                          ? 'bg-primary text-primary-content shadow-sm' 
+                          : 'text-base-content/70 hover:text-base-content'
+                      }`}>
+                        {t.english}
+                      </span>
+                    </label>
+                    <label className="join-item">
+                      <input
+                        type="radio"
+                        name="language"
+                        value="id"
+                        checked={language === 'id'}
+                        onChange={(e) => setLanguage(e.target.value as Language)}
+                        className="sr-only"
+                      />
+                      <span className={`px-3 py-1 text-xs sm:text-sm rounded cursor-pointer transition-all duration-200 ${
+                        language === 'id' 
+                          ? 'bg-primary text-primary-content shadow-sm' 
+                          : 'text-base-content/70 hover:text-base-content'
+                      }`}>
+                        {t.bahasa}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={closeModal}
+                  className="btn btn-ghost btn-sm btn-circle flex-shrink-0"
+                  aria-label="Close modal"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
             
-            <TestimonialForm onSuccess={closeModal} />
+            <TestimonialForm onSuccess={closeModal} language={language} />
           </div>
           
           {/* Modal backdrop - clicking it closes the modal */}
