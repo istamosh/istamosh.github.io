@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Drawer from "./Drawer";
 import { navLinks } from "@/data/navLinks";
-import { ArrowRight } from "./icons/Arrows";
 import { ThemeToggle } from "./ThemeToggle";
 import { useTheme } from "./ThemeProvider";
 

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from '@/utils/axios';
+import { pt_sans } from '@/app/fonts';
 
 interface LoginFormData {
   username: string;
@@ -39,81 +40,71 @@ export default function AdminLoginPage() {
         // Redirect to admin dashboard
         router.push('/admin/dashboard');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
-      setError(error.response?.data?.error || error.response?.data?.message || 'Login failed. Please try again.');
+      if (axios.isAxiosError(error) && error.response) {
+        setError(error.response.data.error || error.response.data.message || 'Login failed. Please try again.');
+      } else {
+        setError('Login failed. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Admin Login
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+    <div className="min-h-screen flex items-center justify-center bg-base-200">
+      <div className="card w-full max-w-md shadow-xl bg-base-100 border border-base-300">
+        <div className="card-body">
+          <h2 className={`text-center text-3xl font-bold mb-2 ${pt_sans.className} text-base-content`}>Admin Login</h2>
+          <p className="text-center text-base-content/70 mb-6 text-sm">
             Access the testimonial management dashboard
           </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="username" className="sr-only">
-                Username
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="form-control">
+              <label htmlFor="username" className="label">
+                <span className="label-text">Username</span>
               </label>
               <input
                 id="username"
                 name="username"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="input input-bordered w-full"
                 placeholder="Username"
                 value={formData.username}
                 onChange={handleInputChange}
+                autoComplete="username"
               />
             </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
+            <div className="form-control">
+              <label htmlFor="password" className="label">
+                <span className="label-text">Password</span>
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="input input-bordered w-full"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleInputChange}
+                autoComplete="current-password"
               />
             </div>
-          </div>
-
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="flex">
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-800">
-                    {error}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div>
+            {error && (
+              <div className="alert alert-error shadow-sm text-sm">{error}</div>
+            )}
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Signing in...' : 'Sign in'}
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

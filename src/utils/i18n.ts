@@ -30,6 +30,7 @@ export interface Translations {
   submitTestimonial: string;
   submitting: string;
   addYourTestimonial: string;
+  retry: string;
   
   // Messages
   successMessage: string;
@@ -88,6 +89,7 @@ export const translations: Record<Language, Translations> = {
     submitTestimonial: "Submit Testimonial",
     submitting: "Submitting...",
     addYourTestimonial: "Add Your Testimonial",
+    retry: "Retry",
     
     // Messages
     successMessage: "Thank you for your testimonial! It will be reviewed before being published.",
@@ -113,7 +115,7 @@ export const translations: Record<Language, Translations> = {
     maxLength: "Must not exceed the character limit",
     minLength10: "Must be at least 10 characters",
     invalidUrl: "Please enter a valid URL (e.g., https://linkedin.com/in/yourname)",
-    consentRequired: "You must consent to share your testimonial"
+    consentRequired: "You must consent to share your testimonial",
   },
   id: {
     // Modal Header
@@ -144,6 +146,7 @@ export const translations: Record<Language, Translations> = {
     submitTestimonial: "Kirim Testimoni",
     submitting: "Mengirim...",
     addYourTestimonial: "Tambah Testimoni Anda",
+    retry: "Coba Lagi",
     
     // Messages
     successMessage: "Terima kasih atas testimoni Anda! Testimoni akan ditinjau sebelum dipublikasikan.",
@@ -169,7 +172,7 @@ export const translations: Record<Language, Translations> = {
     maxLength: "Tidak boleh melebihi batas karakter",
     minLength10: "Minimal 10 karakter",
     invalidUrl: "Masukkan URL yang valid (misal: https://linkedin.com/in/namaanda)",
-    consentRequired: "Anda harus menyetujui untuk membagikan testimoni"
+    consentRequired: "Anda harus menyetujui untuk membagikan testimoni",
   }
 };
 

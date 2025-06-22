@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from '@/utils/axios';
+import { pt_sans } from '@/app/fonts';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface Testimonial {
   id: number;
@@ -24,21 +26,16 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<'pending' | 'approved' | 'rejected'>('pending');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    // Check authentication by trying to fetch testimonials
-    // If cookie is invalid, the request will fail and redirect to login
-    fetchTestimonials();
-  }, [router]);
-
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       const response = await axios.get('/api/admin/testimonials');
       setTestimonials(response.data);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching testimonials:', error);
-      if (error.response?.status === 401) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
         // Unauthorized - redirect to login
         router.push('/admin/login');
       } else {
@@ -47,7 +44,13 @@ export default function AdminDashboardPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    // Check authentication by trying to fetch testimonials
+    // If cookie is invalid, the request will fail and redirect to login
+    fetchTestimonials();
+  }, [fetchTestimonials]);
 
   const updateTestimonialStatus = async (id: number, status: 'APPROVED' | 'REJECTED' | 'PENDING') => {
     try {
@@ -65,6 +68,15 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const deleteTestimonial = async (id: number) => {
+    try {
+      await axios.delete(`/api/admin/testimonials/${id}`);
+      setTestimonials(prev => prev.filter(t => t.id !== id));
+    } catch (error) {
+      setError('Failed to delete testimonial');
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await axios.post('/api/user/logout');
@@ -78,51 +90,76 @@ export default function AdminDashboardPage() {
 
   const filteredTestimonials = testimonials.filter(t => t.status.toLowerCase() === activeTab);
 
+  const handleSelect = (id: number) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+    );
+  };
+
+  const handleSelectAll = () => {
+    if (selectedIds.length === filteredTestimonials.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredTestimonials.map((t) => t.id));
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.length === 0) return;
+    try {
+      const res = await axios.post('/api/admin/testimonials/bulk_delete', { ids: selectedIds });
+      setTestimonials((prev) => prev.filter((t) => !selectedIds.includes(t.id)));
+      setSelectedIds([]);
+      toast.success(res.data.message || 'Testimonials deleted successfully.');
+    } catch (error) {
+      setError('Failed to delete selected testimonials');
+      toast.error('Failed to delete selected testimonials');
+    }
+  };
+
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-base-200">
+        <span className="loading loading-spinner loading-lg text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-base-200">
+      <Toaster position="top-center" toastOptions={{
+        className: 'text-base-content bg-base-100 border border-base-300 shadow-lg',
+        style: { fontSize: '1rem', maxWidth: '90vw', wordBreak: 'break-word' }
+      }} />
       {/* Header */}
-      <header className="bg-white shadow">
+      <header className="bg-base-100 shadow border-b border-base-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Testimonial Management
-            </h1>
+            <h1 className={`text-3xl font-bold text-base-content ${pt_sans.className}`}>Testimonial Management</h1>
             <button
               onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+              className="btn btn-error btn-outline"
             >
               Logout
             </button>
           </div>
         </div>
       </header>
-
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {error && (
-          <div className="mb-4 rounded-md bg-red-50 p-4">
-            <div className="text-sm text-red-800">{error}</div>
-          </div>
+          <div className="mb-4 alert alert-error shadow-sm text-sm">{error}</div>
         )}
-
         {/* Tabs */}
-        <div className="border-b border-gray-200 mb-6">
+        <div className="border-b border-base-300 mb-6">
           <nav className="-mb-px flex space-x-8">
             {['pending', 'approved', 'rejected'].map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab as any)}
-                className={`py-2 px-1 border-b-2 font-medium text-sm capitalize ${
+                onClick={() => setActiveTab(tab as 'pending' | 'approved' | 'rejected')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
                   activeTab === tab
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-base-content/60 hover:text-base-content hover:border-base-300'
                 }`}
               >
                 {tab} ({testimonials.filter(t => t.status.toLowerCase() === tab).length})
@@ -130,96 +167,125 @@ export default function AdminDashboardPage() {
             ))}
           </nav>
         </div>
-
         {/* Testimonials List */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <div className="bg-base-100 shadow-xl sm:rounded-xl border border-base-300">
+          {activeTab === 'rejected' && filteredTestimonials.length > 0 && (
+            <div className="flex items-center px-6 pt-4 pb-2 gap-4">
+              <input
+                type="checkbox"
+                checked={selectedIds.length === filteredTestimonials.length}
+                onChange={handleSelectAll}
+                className="checkbox checkbox-sm"
+                aria-label="Select all rejected testimonials"
+              />
+              <span className="text-sm">Select All</span>
+              <button
+                className="btn btn-error btn-sm ml-auto disabled:opacity-50"
+                disabled={selectedIds.length === 0}
+                onClick={handleBulkDelete}
+              >
+                Delete Selected
+              </button>
+            </div>
+          )}
           {filteredTestimonials.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500">No {activeTab} testimonials found.</p>
+              <p className="text-base-content/60">No {activeTab} testimonials found.</p>
             </div>
           ) : (
-            <ul className="divide-y divide-gray-200">
+            <ul className="divide-y divide-base-300">
               {filteredTestimonials.map((testimonial) => (
-                <li key={testimonial.id} className="px-6 py-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center">
-                        <h3 className="text-lg font-medium text-gray-900">
-                          {testimonial.name}
-                        </h3>
-                        <span className={`ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          testimonial.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                          testimonial.status === 'APPROVED' ? 'bg-green-100 text-green-800' :
-                          'bg-red-100 text-red-800'
-                        }`}>
-                          {testimonial.status}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-500 mt-1">
-                        {testimonial.role_company && testimonial.role_company}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Censoring: {testimonial.censor_first_name ? 'First name' : ''} {testimonial.censor_last_name ? 'Last name' : ''} {!testimonial.censor_first_name && !testimonial.censor_last_name ? 'None' : ''}
-                      </p>
-                      <p className="mt-3 text-gray-900">
-                        "{testimonial.testimonial}"
-                      </p>
-                      <p className="text-xs text-gray-400 mt-2">
-                        Submitted: {new Date(testimonial.created_at).toLocaleDateString()}
-                      </p>
+                <li key={testimonial.id} className="px-6 py-4 flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center">
+                      {activeTab === 'rejected' && (
+                        <input
+                          type="checkbox"
+                          className="checkbox checkbox-sm mr-3"
+                          checked={selectedIds.includes(testimonial.id)}
+                          onChange={() => handleSelect(testimonial.id)}
+                          aria-label={`Select testimonial ${testimonial.id}`}
+                        />
+                      )}
+                      <h3 className="text-lg font-semibold text-base-content">
+                        {testimonial.name}
+                      </h3>
+                      <span className={`ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        testimonial.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
+                        testimonial.status === 'APPROVED' ? 'bg-green-100 text-green-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {testimonial.status}
+                      </span>
                     </div>
-                    
-                    {testimonial.status === 'PENDING' && (
-                      <div className="ml-6 flex space-x-2">
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'APPROVED')}
-                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
-                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Reject
-                        </button>
-                      </div>
-                    )}
-                    
-                    {testimonial.status === 'APPROVED' && (
-                      <div className="ml-6 flex space-x-2">
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
-                          className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Retract to Pending
-                        </button>
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
-                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Reject
-                        </button>
-                      </div>
-                    )}
-                    
-                    {testimonial.status === 'REJECTED' && (
-                      <div className="ml-6 flex space-x-2">
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'APPROVED')}
-                          className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
-                          className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md text-sm font-medium"
-                        >
-                          Move to Pending
-                        </button>
-                      </div>
-                    )}
+                    <p className="text-sm text-base-content/70 mt-1">
+                      {testimonial.role_company && testimonial.role_company}
+                    </p>
+                    <p className="text-sm text-base-content/60">
+                      Censoring: {testimonial.censor_first_name ? 'First name' : ''} {testimonial.censor_last_name ? 'Last name' : ''} {!testimonial.censor_first_name && !testimonial.censor_last_name ? 'None' : ''}
+                    </p>
+                    <p className="mt-3 text-base-content">
+                      &quot;{testimonial.testimonial}&quot;
+                    </p>
+                    <p className="text-xs text-base-content/40 mt-2">
+                      Submitted: {new Date(testimonial.created_at).toLocaleDateString()}
+                    </p>
                   </div>
+                  {/* Action Buttons */}
+                  {testimonial.status === 'PENDING' && (
+                    <div className="ml-6 flex flex-col gap-2">
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'APPROVED')}
+                        className="btn btn-success btn-sm"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
+                        className="btn btn-error btn-sm"
+                      >
+                        Reject
+                        </button>
+                    </div>
+                  )}
+                  {testimonial.status === 'APPROVED' && (
+                    <div className="ml-6 flex flex-col gap-2">
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
+                        className="btn btn-warning btn-sm"
+                      >
+                        Retract to Pending
+                      </button>
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'REJECTED')}
+                        className="btn btn-error btn-sm"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  )}
+                  {testimonial.status === 'REJECTED' && (
+                    <div className="ml-6 flex flex-col gap-2">
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'APPROVED')}
+                        className="btn btn-success btn-sm"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => updateTestimonialStatus(testimonial.id, 'PENDING')}
+                        className="btn btn-warning btn-sm"
+                      >
+                        Move to Pending
+                      </button>
+                      <button
+                        onClick={() => deleteTestimonial(testimonial.id)}
+                        className="btn btn-outline btn-error btn-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

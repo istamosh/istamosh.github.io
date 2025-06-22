@@ -31,15 +31,26 @@ const TestimonialSection: React.FC = () => {
         const response = await axios.get('/api/admin/testimonials/approved');
         setApprovedTestimonials(response.data);
       } catch (error) {
-        setError('Failed to load testimonials. Please try again.');
+        setError('Failed to load testimonials.');
       } finally {
         setIsLoading(false);
       }
     };
     fetchApprovedTestimonials();
-    // Expose retry for button
-    (window as any).retryTestimonials = fetchApprovedTestimonials;
   }, []);
+
+  const handleRetry = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get('/api/admin/testimonials/approved');
+      setApprovedTestimonials(response.data);
+    } catch (error) {
+      setError('Failed to load testimonials.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -111,26 +122,13 @@ const TestimonialSection: React.FC = () => {
             ))}
           </div>
         ) : error ? (
-          <div className="alert alert-error flex-col items-center text-center">
-            <span role="alert">{error}</span>
+          <div className="flex flex-col items-center justify-center py-12 gap-4">
+            <p className="text-error text-lg">{error}</p>
             <button
-              className="btn btn-primary btn-sm mt-2"
-              onClick={() => {
-                setIsLoading(true);
-                setError(null);
-                (async () => {
-                  try {
-                    const response = await axios.get('/api/admin/testimonials/approved');
-                    setApprovedTestimonials(response.data);
-                  } catch (error) {
-                    setError('Failed to load testimonials. Please try again.');
-                  } finally {
-                    setIsLoading(false);
-                  }
-                })();
-              }}
+              className="btn btn-error btn-outline"
+              onClick={handleRetry}
             >
-              Retry
+              {t.retry}
             </button>
           </div>
         ) : approvedTestimonials.length === 0 ? (
