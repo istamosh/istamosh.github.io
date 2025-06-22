@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import SectionContainer from "./SectionContainer";
 
 const minStarSize = 0.5;
@@ -54,11 +54,22 @@ const fillCircle = (
 const HeroSection: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const counterRef = useRef(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(true);
+
+  // Intersection Observer to pause animation when not visible
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -67,9 +78,19 @@ const HeroSection: FC = () => {
     canvas.width = width;
     canvas.height = height;
 
-    let stars = populateStars(width, height, starSpacing);
+    // Reduce star count on mobile
+    const isMobile = width < 640;
+    const mobileStarSpacing = 140;
+    let stars = populateStars(
+      width,
+      height,
+      isMobile ? mobileStarSpacing : starSpacing
+    );
 
+    let animationId: number;
     const render = () => {
+      if (!isInView) return; // Pause animation if not in view
+
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
       gradient.addColorStop(0, "oklch(0.208 0.042 265.755)");
       gradient.addColorStop(1, "oklch(0.293 0.066 243.157)");
@@ -106,7 +127,7 @@ const HeroSection: FC = () => {
       });
 
       counterRef.current += 1;
-      window.requestAnimationFrame(render);
+      animationId = window.requestAnimationFrame(render);
     };
 
     const handleResize = () => {
@@ -114,24 +135,39 @@ const HeroSection: FC = () => {
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-
-      stars = populateStars(width, height, starSpacing);
+      const isMobile = width < 640;
+      stars = populateStars(
+        width,
+        height,
+        isMobile ? mobileStarSpacing : starSpacing
+      );
     };
 
     window.addEventListener("resize", handleResize);
     render();
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.cancelAnimationFrame(animationId);
+    };
+  }, [isInView]);
 
   return (
     <>
-      <div className="w-full min-h-screen bg-slate-900 relative flex" id="hero">
+      <div
+        ref={sectionRef}
+        className="w-full min-h-screen bg-slate-900 relative flex"
+        id="hero"
+      >
         <canvas ref={canvasRef} className="w-full h-full absolute" />
         <img
           src="/portfolio-page-hero-transparent.webp"
           alt="hero-img"
           className="absolute place-self-end w-full"
+          loading="eager"
+          decoding="async"
+          width={1920}
+          height={1080}
         />
 
         <SectionContainer className="z-0">

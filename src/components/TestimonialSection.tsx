@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SectionContainer from './SectionContainer';
 import { pt_sans } from '@/app/fonts';
 import TestimonialForm from './TestimonialForm';
@@ -14,6 +14,9 @@ const TestimonialSection: React.FC = () => {
   const [approvedTestimonials, setApprovedTestimonials] = useState<ApprovedTestimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [language, setLanguage] = useState<Language>('en');
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const t = getTranslation(language);
   const openModal = () => setIsModalOpen(true);
@@ -22,17 +25,20 @@ const TestimonialSection: React.FC = () => {
   // Fetch approved testimonials
   useEffect(() => {
     const fetchApprovedTestimonials = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get('/api/admin/testimonials/approved');
         setApprovedTestimonials(response.data);
       } catch (error) {
-        console.error('Error fetching approved testimonials:', error);
+        setError('Failed to load testimonials. Please try again.');
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchApprovedTestimonials();
+    // Expose retry for button
+    (window as any).retryTestimonials = fetchApprovedTestimonials;
   }, []);
 
   // Handle Escape key to close modal
@@ -55,7 +61,19 @@ const TestimonialSection: React.FC = () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen]);  return (
+  }, [isModalOpen]);
+
+  // Intersection Observer logic
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
     <SectionContainer
       id="testimonials"
       className="flex flex-col items-center gap-y-4 border-b-4 border-base-300 pb-10"
@@ -75,11 +93,45 @@ const TestimonialSection: React.FC = () => {
       </button>
 
       {/* Approved Testimonials Display */}
-      <div className="w-full max-w-6xl py-8 overflow-x-hidden">
+      <div ref={sectionRef} className="w-full max-w-6xl py-8 overflow-x-hidden">
         {isLoading ? (
-          <div className="text-center">
-            <span className="loading loading-spinner loading-md"></span>
-            <p className="mt-2 text-base-content/70">{t.loadingTestimonials}</p>
+          <div className="flex gap-6 items-stretch w-max animate-pulse">
+            {[...Array(3)].map((_, idx) => (
+              <div
+                key={idx}
+                className="card bg-base-200 shadow-lg min-w-[300px] max-w-xs w-[90vw] sm:w-80 flex-shrink-0"
+              >
+                <div className="card-body">
+                  <div className="h-6 bg-base-300 rounded w-3/4 mb-4" />
+                  <div className="h-4 bg-base-300 rounded w-1/2 mb-2" />
+                  <div className="h-4 bg-base-300 rounded w-1/3 mb-2" />
+                  <div className="h-3 bg-base-300 rounded w-1/4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <div className="alert alert-error flex-col items-center text-center">
+            <span role="alert">{error}</span>
+            <button
+              className="btn btn-primary btn-sm mt-2"
+              onClick={() => {
+                setIsLoading(true);
+                setError(null);
+                (async () => {
+                  try {
+                    const response = await axios.get('/api/admin/testimonials/approved');
+                    setApprovedTestimonials(response.data);
+                  } catch (error) {
+                    setError('Failed to load testimonials. Please try again.');
+                  } finally {
+                    setIsLoading(false);
+                  }
+                })();
+              }}
+            >
+              Retry
+            </button>
           </div>
         ) : approvedTestimonials.length === 0 ? (
           <div className="text-center py-12">
@@ -91,13 +143,13 @@ const TestimonialSection: React.FC = () => {
           <motion.div
             className="flex gap-6 items-stretch w-max"
             style={{ cursor: 'grab' }}
-            animate={{ x: [0, -approvedTestimonials.length * 320] }}
-            transition={{
+            animate={isInView ? { x: [0, -approvedTestimonials.length * 320] } : { x: 0 }}
+            transition={isInView ? {
               repeat: Infinity,
               repeatType: 'loop',
-              duration: approvedTestimonials.length * 6, // slow scroll
+              duration: approvedTestimonials.length * 6,
               ease: 'linear',
-            }}
+            } : {}}
             drag="x"
             dragConstraints={{ left: -approvedTestimonials.length * 320, right: 0 }}
           >

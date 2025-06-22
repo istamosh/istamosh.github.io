@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef, useEffect } from "react";
 import { EmblaOptionsType, EmblaCarouselType } from "embla-carousel";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import Autoplay from "embla-carousel-autoplay";
@@ -25,8 +25,31 @@ const truncateText = (text: string, limit: number) => {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props;
+  const sectionRef = useRef<HTMLElement>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()]);
   const [activeOverlay, setActiveOverlay] = useState<number | null>(null);
+
+  // Intersection Observer logic to pause/resume autoplay
+  useEffect(() => {
+    if (!sectionRef.current || !emblaApi) return;
+    const autoplay = emblaApi.plugins()?.autoplay;
+    if (!autoplay) return;
+    let lastInView = false;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!lastInView) autoplay.play();
+          lastInView = true;
+        } else {
+          if (lastInView) autoplay.stop();
+          lastInView = false;
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [emblaApi]);
 
   const onNavButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
     const autoplay = emblaApi?.plugins()?.autoplay;
@@ -69,7 +92,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   };
 
   return (
-    <section className="embla">
+    <section className="embla" ref={sectionRef}>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide) => (
