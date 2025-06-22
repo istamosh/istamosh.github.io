@@ -7,6 +7,7 @@ import TestimonialForm from './TestimonialForm';
 import axios from '@/utils/axios';
 import { Language, getTranslation } from '@/utils/i18n';
 import { ApprovedTestimonial } from '@/types/testimonial';
+import { motion } from 'framer-motion';
 
 const TestimonialSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,7 +75,7 @@ const TestimonialSection: React.FC = () => {
       </button>
 
       {/* Approved Testimonials Display */}
-      <div className="w-full max-w-6xl py-8">
+      <div className="w-full max-w-6xl py-8 overflow-x-hidden">
         {isLoading ? (
           <div className="text-center">
             <span className="loading loading-spinner loading-md"></span>
@@ -87,11 +88,23 @@ const TestimonialSection: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {approvedTestimonials.map((testimonial) => (
+          <motion.div
+            className="flex gap-6 items-stretch w-max"
+            style={{ cursor: 'grab' }}
+            animate={{ x: [0, -approvedTestimonials.length * 320] }}
+            transition={{
+              repeat: Infinity,
+              repeatType: 'loop',
+              duration: approvedTestimonials.length * 6, // slow scroll
+              ease: 'linear',
+            }}
+            drag="x"
+            dragConstraints={{ left: -approvedTestimonials.length * 320, right: 0 }}
+          >
+            {approvedTestimonials.concat(approvedTestimonials).map((testimonial, idx) => (
               <div
-                key={testimonial.id}
-                className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                key={testimonial.id + '-' + idx}
+                className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300 min-w-[300px] max-w-xs w-[90vw] sm:w-80 flex-shrink-0"
               >
                 <div className="card-body">
                   <blockquote className="text-base-content/90 italic mb-4">
@@ -126,7 +139,7 @@ const TestimonialSection: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 

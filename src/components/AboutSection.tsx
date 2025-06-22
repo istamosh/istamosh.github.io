@@ -36,7 +36,7 @@ const AboutSection: FC = () => {
           <li className="flex flex-col items-center">
             <Book className="fill-primary" />
             <span>
-              Enrolling as{" "}
+              Enrolled as{" "}
               <a
                 className="link link-hover link-primary"
                 href="https://journal.revou.co/kenalan-fsse/"
@@ -50,7 +50,7 @@ const AboutSection: FC = () => {
           <li className="flex flex-col items-center">
             <VideoCam className="fill-primary" />
             <span>
-              Having a{" "}
+              Have{" "}
               <a
                 className="link link-hover link-primary"
                 href="https://www.youtube.com/@istamosh"
@@ -58,7 +58,7 @@ const AboutSection: FC = () => {
               >
                 Youtube channel
               </a>{" "}
-              mostly about coding tutorial.
+              mostly about solving Hackerrank & Leetcode challenges and other coding tutorials.
             </span>
           </li>
         </ul>
