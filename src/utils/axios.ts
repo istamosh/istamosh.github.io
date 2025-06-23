@@ -20,9 +20,13 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      // Only redirect to login if we're on an admin page
-      if (window.location.pathname.startsWith('/admin') && 
-          !window.location.pathname.includes('/login')) {
+      const reqUrl = error.config?.url || '';
+      // Only redirect to login if not a profile update request
+      if (
+        window.location.pathname.startsWith('/admin') &&
+        !window.location.pathname.includes('/login') &&
+        !reqUrl.startsWith('/api/user') // skip redirect for profile update
+      ) {
         window.location.href = '/admin/login';
       }
     }

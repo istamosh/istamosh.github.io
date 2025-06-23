@@ -30,7 +30,7 @@ const TestimonialSection: React.FC = () => {
       try {
         const response = await axios.get('/api/admin/testimonials/approved');
         setApprovedTestimonials(response.data);
-      } catch (error) {
+      } catch {
         setError('Failed to load testimonials.');
       } finally {
         setIsLoading(false);
@@ -45,7 +45,7 @@ const TestimonialSection: React.FC = () => {
     try {
       const response = await axios.get('/api/admin/testimonials/approved');
       setApprovedTestimonials(response.data);
-    } catch (error) {
+    } catch {
       setError('Failed to load testimonials.');
     } finally {
       setIsLoading(false);
