@@ -1,5 +1,6 @@
 "use client";
 import { navLinks } from "@/data/navLinks";
+import { socialLinks } from "@/data/socialLinks";
 import Link from "next/link";
 import React, { FC } from "react";
 import { useTheme } from "./ThemeProvider";
@@ -85,9 +86,28 @@ const Drawer: FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
               </ul>
             </nav>
 
-            {/* Theme toggle and footer in easy thumb reach */}
+            {/* Theme toggle and social media in easy thumb reach */}
             <div className="p-4 border-t border-base-300">
               <div className="flex flex-col items-center space-y-4">
+                {/* Social Media Links */}
+                <div className="flex items-center space-x-4">
+                  {socialLinks.slice(0, 2).map((social) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.ariaLabel}
+                        className="transition-all duration-200 hover:scale-110 text-primary hover:text-primary/80"
+                      >
+                        <IconComponent className="w-8 h-8 fill-current" />
+                      </a>
+                    );
+                  })}
+                </div>
+                
                 <div className="flex items-center space-x-2">
                   <span className="text-sm opacity-70">Theme</span>
                   <ThemeToggle />

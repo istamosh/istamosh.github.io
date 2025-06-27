@@ -4,6 +4,7 @@ import ProjectSection from "@/components/ProjectSection";
 import Navbar from "@/components/Navbar";
 import AboutSection from "@/components/AboutSection";
 import TestimonialSection from "@/components/TestimonialSection";
+import GallerySection from "@/components/GallerySection";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -30,6 +31,7 @@ export default function Home() {
       <Navbar />
       <ProjectSection />
       <TestimonialSection />
+      <GallerySection />
       <AboutSection />
     </main>
   );

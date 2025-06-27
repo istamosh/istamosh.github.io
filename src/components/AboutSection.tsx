@@ -1,19 +1,14 @@
 import React, { FC } from "react";
 import SectionContainer from "./SectionContainer";
 import { pt_sans } from "@/app/fonts";
-import {
-  Docker,
-  Flask,
-  Next,
-  Photoshop,
-  Python,
-  Typescript,
-  ReactIcon
-} from "./icons/SoftwareDevelopmentIcons";
+import { getProficientTechnologies, getLearningTechnologies } from "@/data/technologies";
 import Footer from "./Footer";
 import { Book, Briefcase, VideoCam } from "./icons/AboutMeIcons";
 
 const AboutSection: FC = () => {
+  const proficientTechnologies = getProficientTechnologies();
+  const learningTechnologies = getLearningTechnologies();
+
   return (
     <SectionContainer id="about" className="flex flex-col gap-y-4">
       <h1
@@ -67,16 +62,23 @@ const AboutSection: FC = () => {
 
       <div className="text-center">
         <span className="font-bold text-xl">
-          Currently learning these technologies
+          Technologies I am proficient in:
+        </span>
+        <div className={`fill-primary flex justify-center gap-x-2 flex-wrap mb-6`}>
+          {proficientTechnologies.map((tech) => {
+            const IconComponent = tech.icon;
+            return <IconComponent key={tech.name} />;
+          })}
+        </div>
+        
+        <span className="font-bold text-xl">
+          Currently learning:
         </span>
         <div className={`fill-primary flex justify-center gap-x-2 flex-wrap`}>
-          <Typescript />
-          <ReactIcon />
-          <Next />
-          <Python />
-          <Flask />
-          <Docker />
-          <Photoshop />
+          {learningTechnologies.map((tech) => {
+            const IconComponent = tech.icon;
+            return <IconComponent key={tech.name} />;
+          })}
         </div>
       </div>
 

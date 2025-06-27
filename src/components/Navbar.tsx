@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Drawer from "./Drawer";
 import { navLinks } from "@/data/navLinks";
+import { socialLinks } from "@/data/socialLinks";
 import { ThemeToggle } from "./ThemeToggle";
 import { useTheme } from "./ThemeProvider";
 
@@ -18,7 +19,7 @@ const Navbar = () => {
           theme === "nord" ? "via-blue-500/40" : "via-primary/15"
         } via-50% to-transparent to-95%`}
       >
-        <div className="flex flex-row justify-center items-center py-2">
+        <div className="flex flex-row justify-center items-center py-2 relative">
           {/* Desktop navigation */}
           <nav className="flex gap-x-8">
             {navLinks.map((link) => (
@@ -36,8 +37,31 @@ const Navbar = () => {
             ))}
           </nav>
 
+          {/* Social media icons */}
+          <div className="absolute left-4 flex gap-x-3">
+            {socialLinks.slice(0, 2).map((social) => {
+              const IconComponent = social.icon;
+              return (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.ariaLabel}
+                  className={`transition-all duration-200 hover:scale-110 ${
+                    theme === "nord" 
+                      ? "text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] hover:text-blue-200" 
+                      : "text-primary hover:text-primary/80"
+                  }`}
+                >
+                  <IconComponent className="w-6 h-6 fill-current" />
+                </a>
+              );
+            })}
+          </div>
+
           {/* Theme toggle for desktop */}
-          <div className="absolute top-0 right-4">
+          <div className="absolute right-4">
             <ThemeToggle />
           </div>
         </div>
