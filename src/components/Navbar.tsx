@@ -9,7 +9,7 @@ import { useTheme } from "./ThemeProvider";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { theme } = useTheme();
+  const { theme, mounted } = useTheme();
 
   return (
     <>
@@ -62,7 +62,7 @@ const Navbar = () => {
 
           {/* Theme toggle for desktop */}
           <div className="absolute right-4">
-            <ThemeToggle />
+            {mounted && <ThemeToggle />}
           </div>
         </div>
       </div>

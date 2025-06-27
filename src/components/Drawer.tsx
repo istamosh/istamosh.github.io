@@ -12,7 +12,7 @@ interface DrawerProps {
 }
 
 const Drawer: FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
-  const { theme } = useTheme();
+  const { theme, mounted } = useTheme();
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -110,7 +110,7 @@ const Drawer: FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
                 
                 <div className="flex items-center space-x-2">
                   <span className="text-sm opacity-70">Theme</span>
-                  <ThemeToggle />
+                  {mounted && <ThemeToggle />}
                 </div>
                 <p className="text-xs text-center opacity-50">
                   Tap anywhere outside to close

@@ -3,7 +3,14 @@
 import { useTheme } from "./ThemeProvider";
 
 export const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, mounted } = useTheme();
+  
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="h-10 w-10 animate-pulse bg-base-300 rounded-full" />
+    );
+  }
   
   const getThemeIcon = () => {
     switch (theme) {

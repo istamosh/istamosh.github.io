@@ -13,24 +13,31 @@ type Theme = "nord" | "night";
 type ThemeContextType = {
   theme: Theme;
   toggleTheme: () => void;
+  mounted: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>("night");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
+    // Only update theme if it's different from the server-rendered default
     const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
+    if (savedTheme && savedTheme !== "night") {
       setTheme(savedTheme);
       document.documentElement.setAttribute("data-theme", savedTheme);
-    } else {
+    } else if (!savedTheme) {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       const systemTheme: Theme = mediaQuery.matches ? "night" : "nord";
 
-      setTheme(systemTheme);
-      document.documentElement.setAttribute("data-theme", systemTheme);
+      if (systemTheme !== "night") {
+        setTheme(systemTheme);
+        document.documentElement.setAttribute("data-theme", systemTheme);
+      }
       localStorage.setItem("theme", systemTheme);
 
       const handleChange = (e: MediaQueryListEvent) => {
@@ -53,7 +60,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   );
