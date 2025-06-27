@@ -37,7 +37,7 @@ const Drawer: FC<DrawerProps> = ({ isOpen, setIsOpen }) => {
           {/* Thumb-zone optimized drawer content */}
           <div
             className={`min-h-full w-80 bg-base-100/95 backdrop-blur-md flex flex-col ${
-              theme === "light" ? "bg-white/95" : "bg-base-100/95"
+              theme === "nord" ? "bg-white/95" : "bg-base-100/95"
             }`}
           >
             {/* Header with close button in easy reach */}

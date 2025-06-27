@@ -15,7 +15,7 @@ const Navbar = () => {
       {/* Desktop-only top bar - completely hidden on mobile */}
       <div
         className={`hidden sm:block sticky top-0 -mt-12 z-10 w-full bg-gradient-to-r from-transparent from-5% backdrop-blur-sm ${
-          theme === "light" ? "via-blue-500/40" : "via-primary/15"
+          theme === "nord" ? "via-blue-500/40" : "via-primary/15"
         } via-50% to-transparent to-95%`}
       >
         <div className="flex flex-row justify-center items-center py-2">
@@ -26,7 +26,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className={
-                  theme === "light"
+                  theme === "nord"
                     ? "text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)]"
                     : "text-primary"
                 }
@@ -47,7 +47,7 @@ const Navbar = () => {
       <button
         type="button"
         className={`sm:hidden fixed bottom-6 right-6 z-30 p-4 rounded-full shadow-lg backdrop-blur-sm border-2 transition-all duration-300 ${
-          theme === "light"
+          theme === "nord"
             ? "bg-blue-500/90 border-blue-400 text-white shadow-blue-500/25"
             : "bg-primary/90 border-primary text-white shadow-primary/25"
         } ${isDrawerOpen ? "scale-110" : "scale-100 hover:scale-105"}`}

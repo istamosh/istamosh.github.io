@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-type Theme = "light" | "night" | "nord";
+type Theme = "nord" | "night";
 
 type ThemeContextType = {
   theme: Theme;
@@ -27,14 +27,14 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
       document.documentElement.setAttribute("data-theme", savedTheme);
     } else {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const systemTheme: Theme = mediaQuery.matches ? "night" : "light";
+      const systemTheme: Theme = mediaQuery.matches ? "night" : "nord";
 
       setTheme(systemTheme);
       document.documentElement.setAttribute("data-theme", systemTheme);
       localStorage.setItem("theme", systemTheme);
 
       const handleChange = (e: MediaQueryListEvent) => {
-        const newTheme: Theme = e.matches ? "night" : "light";
+        const newTheme: Theme = e.matches ? "night" : "nord";
         setTheme(newTheme);
         document.documentElement.setAttribute("data-theme", newTheme);
         localStorage.setItem("theme", newTheme);
@@ -46,20 +46,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const toggleTheme = () => {
-    let newTheme: Theme;
-    switch (theme) {
-      case "light":
-        newTheme = "nord";
-        break;
-      case "nord":
-        newTheme = "night";
-        break;
-      case "night":
-        newTheme = "light";
-        break;
-      default:
-        newTheme = "light";
-    }
+    const newTheme: Theme = theme === "nord" ? "night" : "nord";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
