@@ -1,19 +1,21 @@
 "use client";
 
 import { useTheme } from "./ThemeProvider";
+import { useEffect, useState } from "react";
 
 export const ThemeToggle = () => {
-  const { theme, toggleTheme, mounted } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const [isClient, setIsClient] = useState(false);
   
-  // Don't render until mounted to prevent hydration mismatch
-  if (!mounted) {
-    return (
-      <div className="h-10 w-10 animate-pulse bg-base-300 rounded-full" />
-    );
-  }
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   const getThemeIcon = () => {
-    switch (theme) {
+    // Always default to night theme icon during SSR
+    const currentTheme = isClient ? theme : "night";
+    
+    switch (currentTheme) {
       case "nord":
         return (
           <svg
@@ -26,6 +28,7 @@ export const ThemeToggle = () => {
           </svg>
         );
       case "night":
+      default:
         return (
           <svg
             className="h-10 w-10 fill-primary"
@@ -35,8 +38,6 @@ export const ThemeToggle = () => {
             <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
           </svg>
         );
-      default:
-        return null;
     }
   };
 
@@ -44,7 +45,8 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className="transition-transform hover:scale-110 active:scale-95"
-      title={`Current theme: ${theme}. Click to switch.`}
+      title={`Current theme: ${isClient ? theme : "night"}. Click to switch.`}
+      suppressHydrationWarning={true}
     >
       {getThemeIcon()}
     </button>

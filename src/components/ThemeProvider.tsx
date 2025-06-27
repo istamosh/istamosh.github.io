@@ -13,18 +13,14 @@ type Theme = "nord" | "night";
 type ThemeContextType = {
   theme: Theme;
   toggleTheme: () => void;
-  mounted: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>("night");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    
     // Only update theme if it's different from the server-rendered default
     const savedTheme = localStorage.getItem("theme") as Theme;
     if (savedTheme && savedTheme !== "night") {
@@ -60,7 +56,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, mounted }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
