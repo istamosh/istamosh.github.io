@@ -8,6 +8,7 @@ import {
   Photoshop,
   Python,
   Typescript,
+  ReactIcon
 } from "./icons/SoftwareDevelopmentIcons";
 import Footer from "./Footer";
 import { Book, Briefcase, VideoCam } from "./icons/AboutMeIcons";
@@ -69,11 +70,12 @@ const AboutSection: FC = () => {
           Currently learning these technologies
         </span>
         <div className={`fill-primary flex justify-center gap-x-2 flex-wrap`}>
-          <Flask />
-          <Docker />
+          <Typescript />
+          <ReactIcon />
           <Next />
           <Python />
-          <Typescript />
+          <Flask />
+          <Docker />
           <Photoshop />
         </div>
       </div>

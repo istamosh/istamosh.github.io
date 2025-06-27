@@ -21,6 +21,6 @@ export default {
   darkMode: ["class", '[data-theme="night"]'],
   plugins: [daisyui],
   daisyui: {
-    themes: ["light", "night"],
+    themes: ["light", "night", "nord"],
   },
 } satisfies Config;

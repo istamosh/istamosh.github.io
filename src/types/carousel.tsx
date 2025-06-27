@@ -5,4 +5,5 @@ export type CarouselSlide = {
   description: string;
   projectLink?: string;
   githubLink: string;
+  techStack?: string[]; // Array of tech stack icon names
 };

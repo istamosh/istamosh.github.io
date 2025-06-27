@@ -9,6 +9,7 @@ export const SLIDES: CarouselSlide[] = [
       "A group final project about e-commerce-like platform that encourages sustainability lifestyle and enable users to act as both seller, buyer, and expedition. Selling ranged from upcycled products to near-expiry goods within local area. Created using NextJS and Leaflet",
     projectLink: "https://sustainable-community-market-fe.vercel.app/team",
     githubLink: "https://github.com/alfifrr/sustainable-community-market-fe",
+    techStack: ["Next", "Typescript"]
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const SLIDES: CarouselSlide[] = [
       "A collection of API endpoints for the SC Market project. Developed with Flask, hosted on Render and Supabase",
     projectLink: "https://sustainable-community-market.onrender.com/api/docs/",
     githubLink: "https://github.com/alfifrr/sustainable-community-market",
+    techStack: ["Flask", "Python"]
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ export const SLIDES: CarouselSlide[] = [
       "An M-banking platform that allow users to have multiple accounts and conduct deposit, withdrawal, bill scheduling and payment, budgeting, and even transfer to another account, developed using Flask, hosted on Render and Supabase, and has Docker version for local uses",
     projectLink: "https://banking-system-r349.onrender.com/api/docs/",
     githubLink: "https://github.com/alfifrr/banking-system/tree/feature-docker",
+    techStack: ["Flask", "Python", "Docker"]
   },
   {
     id: 4,
@@ -36,5 +39,6 @@ export const SLIDES: CarouselSlide[] = [
       "React TS + Laravel application about creating Markdown-powered user posts with administrator feature, currently hosted on Hostinger (please don't use your real e-mail there)",
     projectLink: "https://istamosh.com/guestposts",
     githubLink: "https://github.com/istamosh/laravel-react-fullstack",
+    techStack: ["Typescript", 'ReactIcon']
   },
 ];

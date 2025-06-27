@@ -12,6 +12,7 @@ import {
 } from "./EmblaCarouselArrowButtons";
 import { CarouselSlide } from "@/types/carousel";
 import { pt_sans } from "@/app/fonts";
+import { Docker, Flask, Next, Typescript, Python, Photoshop, ReactIcon } from '../icons/SoftwareDevelopmentIcons';
 
 type PropType = {
   slides: CarouselSlide[];
@@ -21,6 +22,37 @@ type PropType = {
 const truncateText = (text: string, limit: number) => {
   if (text.length <= limit) return text;
   return text.slice(0, limit).trim() + "...";
+};
+
+// Tech stack icon mapping
+const techIcons: { [key: string]: React.ComponentType } = {
+  Docker,
+  Flask,
+  Next,
+  Typescript,
+  Python,
+  Photoshop,
+  ReactIcon
+};
+
+const renderTechStack = (techStack?: string[]) => {
+  if (!techStack || techStack.length === 0) return null;
+  
+  return (
+    <div className="flex items-center gap-2 mt-3 mb-2">
+      <span className="text-sm font-medium text-base-content/70">Tech Stack:</span>
+      <div className="flex gap-2 fill-primary">
+        {techStack.map((tech) => {
+          const IconComponent = techIcons[tech];
+          return IconComponent ? (
+            <div key={tech} className="w-6 h-6 [&>a]:pointer-events-none [&_svg]:w-full [&_svg]:h-full">
+              <IconComponent />
+            </div>
+          ) : null;
+        })}
+      </div>
+    </div>
+  );
 };
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
@@ -112,26 +144,27 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     </div>
                   </div>
                   <div className="embla__slide__text w-full sm:w-1/2 flex flex-col py-4">
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-center">
                       <h3 className={`text-2xl font-bold ${pt_sans.className}`}>
                         {slide.title}
                       </h3>
                       <p className={`text-base font-normal ${pt_sans.className} leading-snug opacity-90`}>
                         {truncateText(slide.description, 150)}
                       </p>
+                      {renderTechStack(slide.techStack)}
                     </div>
-                    <div className="flex flex-wrap gap-3 mt-6">
+                    <div className="flex flex-wrap justify-center gap-3 mt-6">
                       {slide.projectLink && (
                         <a
                           href={slide.projectLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="gap-2 inline-flex items-center px-3 py-1.5 text-base bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                          className="btn btn-primary btn-sm gap-2 inline-flex items-center px-3 py-1.5 text-base transition-colors duration-200 focus:outline-none"
                           aria-label={`View live demo of ${slide.title}`}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 mr-1.5"
+                            className="h-4 w-4"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -150,12 +183,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         href={slide.githubLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="gap-2 inline-flex items-center px-3 py-1.5 text-base bg-gray-800 hover:bg-gray-900 active:bg-gray-950 text-white rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2"
+                        className="btn btn-outline btn-sm gap-2 inline-flex items-center px-3 py-1.5 text-base transition-colors duration-200 focus:outline-none"
                         aria-label={`View GitHub repository for ${slide.title}`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 mr-1.5"
+                          className="h-4 w-4"
                           viewBox="0 0 24 24"
                           fill="currentColor"
                         >
@@ -203,13 +236,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                           <p className={`text-sm ${pt_sans.className} leading-snug opacity-90`}>
                             {truncateText(slide.description, 120)}
                           </p>
+                          {slide.techStack && slide.techStack.length > 0 && (
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-medium text-white/80">Tech:</span>
+                              <div className="flex gap-1 fill-primary">
+                                {slide.techStack.map((tech) => {
+                                  const IconComponent = techIcons[tech];
+                                  return IconComponent ? (
+                                    <div key={tech} className="w-4 h-4 [&>a]:pointer-events-none [&_svg]:w-full [&_svg]:h-full">
+                                      <IconComponent />
+                                    </div>
+                                  ) : null;
+                                })}
+                              </div>
+                            </div>
+                          )}
                           <div className="flex flex-wrap gap-2">
                             {slide.projectLink && (
                               <a
                                 href={slide.projectLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center px-3 py-1.5 text-sm bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors duration-200"
+                                className="btn btn-primary btn-xs inline-flex items-center px-3 py-1.5 text-sm transition-colors duration-200"
                                 aria-label={`View live demo of ${slide.title}`}
                                 onClick={(e) => e.stopPropagation()}
                               >
@@ -234,7 +282,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                               href={slide.githubLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center px-3 py-1.5 text-sm bg-gray-700 hover:bg-gray-800 text-white rounded-md transition-colors duration-200"
+                              className="btn btn-outline btn-xs inline-flex items-center px-3 py-1.5 text-sm transition-colors duration-200"
                               aria-label={`View GitHub repository for ${slide.title}`}
                               onClick={(e) => e.stopPropagation()}
                             >

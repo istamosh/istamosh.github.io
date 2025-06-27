@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 
-type Theme = "light" | "night";
+type Theme = "light" | "night" | "nord";
 
 type ThemeContextType = {
   theme: Theme;
@@ -46,7 +46,20 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "night" : "light";
+    let newTheme: Theme;
+    switch (theme) {
+      case "light":
+        newTheme = "nord";
+        break;
+      case "nord":
+        newTheme = "night";
+        break;
+      case "night":
+        newTheme = "light";
+        break;
+      default:
+        newTheme = "light";
+    }
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);

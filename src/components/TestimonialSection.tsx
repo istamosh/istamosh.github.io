@@ -138,58 +138,60 @@ const TestimonialSection: React.FC = () => {
             </p>
           </div>
         ) : (
-          <motion.div
-            className="flex gap-6 items-stretch w-max"
-            style={{ cursor: 'grab' }}
-            animate={isInView ? { x: [0, -approvedTestimonials.length * 320] } : { x: 0 }}
-            transition={isInView ? {
-              repeat: Infinity,
-              repeatType: 'loop',
-              duration: approvedTestimonials.length * 6,
-              ease: 'linear',
-            } : {}}
-            drag="x"
-            dragConstraints={{ left: -approvedTestimonials.length * 320, right: 0 }}
-          >
-            {approvedTestimonials.concat(approvedTestimonials).map((testimonial, idx) => (
-              <div
-                key={testimonial.id + '-' + idx}
-                className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300 min-w-[300px] max-w-xs w-[90vw] sm:w-80 flex-shrink-0"
-              >
-                <div className="card-body">
-                  <blockquote className="text-base-content/90 italic mb-4">
-                    &ldquo;{testimonial.testimonial}&rdquo;
-                  </blockquote>
-                  <div className="card-actions justify-end">
-                    <div className="text-right">
-                      {testimonial.profile_link ? (
-                        <a
-                          href={testimonial.profile_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-semibold text-primary hover:text-primary-focus transition-colors duration-200 cursor-pointer"
-                        >
-                          {testimonial.name}
-                        </a>
-                      ) : (
-                        <p className="font-semibold text-base-content">
-                          {testimonial.name}
+          <div className={approvedTestimonials.length === 1 ? "flex justify-center" : ""}>
+            <motion.div
+              className="flex gap-6 items-stretch w-max"
+              style={{ cursor: approvedTestimonials.length > 1 ? 'grab' : 'default' }}
+              animate={isInView && approvedTestimonials.length > 1 ? { x: [0, -(approvedTestimonials.length * 350)] } : { x: 0 }}
+              transition={isInView && approvedTestimonials.length > 1 ? {
+                repeat: Infinity,
+                repeatType: 'loop',
+                duration: approvedTestimonials.length * 6,
+                ease: 'linear',
+              } : {}}
+              drag={approvedTestimonials.length > 1 ? "x" : false}
+              dragConstraints={approvedTestimonials.length > 1 ? { left: -(approvedTestimonials.length * 350), right: 0 } : {}}
+            >
+              {(approvedTestimonials.length > 1 ? approvedTestimonials.concat(approvedTestimonials) : approvedTestimonials).map((testimonial, idx) => (
+                <div
+                  key={testimonial.id + '-' + idx}
+                  className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow duration-300 min-w-[300px] max-w-xs w-[90vw] sm:w-80 flex-shrink-0"
+                >
+                  <div className="card-body">
+                    <blockquote className="text-base-content/90 italic mb-4">
+                      &ldquo;{testimonial.testimonial}&rdquo;
+                    </blockquote>
+                    <div className="card-actions justify-end">
+                      <div className="text-right">
+                        {testimonial.profile_link ? (
+                          <a
+                            href={testimonial.profile_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-primary hover:text-primary-focus transition-colors duration-200 cursor-pointer"
+                          >
+                            {testimonial.name}
+                          </a>
+                        ) : (
+                          <p className="font-semibold text-base-content">
+                            {testimonial.name}
+                          </p>
+                        )}
+                        {testimonial.role_company && (
+                          <p className="text-sm text-base-content/70">
+                            {testimonial.role_company}
+                          </p>
+                        )}
+                        <p className="text-xs text-base-content/50 mt-1">
+                          {new Date(testimonial.created_at).toLocaleDateString()}
                         </p>
-                      )}
-                      {testimonial.role_company && (
-                        <p className="text-sm text-base-content/70">
-                          {testimonial.role_company}
-                        </p>
-                      )}
-                      <p className="text-xs text-base-content/50 mt-1">
-                        {new Date(testimonial.created_at).toLocaleDateString()}
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          </div>
         )}
       </div>
 
