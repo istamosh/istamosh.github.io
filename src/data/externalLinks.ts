@@ -1,6 +1,6 @@
 export const externalLinks = [
   {
-    link: "https://www.linkedin.com/in/alfian-f-02a0032a9/",
+    link: "https://www.linkedin.com/in/alfian-ferdinan/",
     title: "LinkedIn",
   },
   {
