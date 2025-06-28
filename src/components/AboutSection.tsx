@@ -2,12 +2,14 @@ import React, { FC } from "react";
 import SectionContainer from "./SectionContainer";
 import { pt_sans } from "@/app/fonts";
 import { getProficientTechnologies, getLearningTechnologies } from "@/data/technologies";
+import { getCurrentActivities } from "@/data/currentActivities";
+import { ActivityDescription } from "./ActivityDescription";
 import Footer from "./Footer";
-import { Book, Briefcase, VideoCam } from "./icons/AboutMeIcons";
 
 const AboutSection: FC = () => {
   const proficientTechnologies = getProficientTechnologies();
   const learningTechnologies = getLearningTechnologies();
+  const currentActivities = getCurrentActivities();
 
   return (
     <SectionContainer id="about" className="flex flex-col gap-y-4">
@@ -22,41 +24,15 @@ const AboutSection: FC = () => {
           I am open for opportunity while:
         </span>
         <ul className="sm:grid sm:grid-cols-3 sm:gap-x-8">
-          <li className="flex flex-col items-center">
-            <Briefcase className="fill-primary" />
-            <span>
-              Currently working as a freelance graphic designer that dabbles in
-              Photoshop.
-            </span>
-          </li>
-          <li className="flex flex-col items-center">
-            <Book className="fill-primary" />
-            <span>
-              Enrolled as{" "}
-              <a
-                className="link link-hover link-primary"
-                href="https://journal.revou.co/kenalan-fsse/"
-                target="_blank"
-              >
-                RevoU FSSE
-              </a>{" "}
-              student.
-            </span>
-          </li>
-          <li className="flex flex-col items-center">
-            <VideoCam className="fill-primary" />
-            <span>
-              Have{" "}
-              <a
-                className="link link-hover link-primary"
-                href="https://www.youtube.com/@istamosh"
-                target="_blank"
-              >
-                Youtube channel
-              </a>{" "}
-              mostly about solving Hackerrank & Leetcode challenges and other coding tutorials.
-            </span>
-          </li>
+          {currentActivities.map((activity) => {
+            const IconComponent = activity.icon;
+            return (
+              <li key={activity.id} className="flex flex-col items-center">
+                <IconComponent className="fill-primary" />
+                <ActivityDescription activity={activity} />
+              </li>
+            );
+          })}
         </ul>
       </div>
 
