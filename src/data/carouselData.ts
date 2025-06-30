@@ -3,6 +3,7 @@ import { CarouselSlide } from "@/types/carousel";
 export const SLIDES: CarouselSlide[] = [
   {
     id: 1,
+    slug: "sustainable-community-market",
     image: "/sustainable_community_market_fe.png",
     title: "Sustainable Community Market",
     description:
@@ -13,6 +14,7 @@ export const SLIDES: CarouselSlide[] = [
   },
   {
     id: 2,
+    slug: "sc-market-api-documentation",
     image: "/sustainable_community_market.png",
     title: "Swagger Documentation for SC Market",
     description:
@@ -23,6 +25,7 @@ export const SLIDES: CarouselSlide[] = [
   },
   {
     id: 3,
+    slug: "banking-system-api",
     image: "/banking_system.png",
     title: "Banking System API",
     description:
@@ -33,6 +36,7 @@ export const SLIDES: CarouselSlide[] = [
   },
   {
     id: 4,
+    slug: "mosphere-fullstack",
     image: "/mosphere.png",
     title: "Mosphere",
     description:

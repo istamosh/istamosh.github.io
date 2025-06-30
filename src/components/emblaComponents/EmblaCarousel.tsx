@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { EmblaOptionsType, EmblaCarouselType } from "embla-carousel";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import Autoplay from "embla-carousel-autoplay";
@@ -196,6 +197,27 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         </svg>
                         Code
                       </a>
+                      <Link
+                        href={`/projects/${slide.slug}`}
+                        className="btn btn-ghost btn-sm gap-2 inline-flex items-center px-3 py-1.5 text-base transition-colors duration-200 focus:outline-none"
+                        aria-label={`View detailed information about ${slide.title}`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        Details
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -296,6 +318,28 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                               </svg>
                               Code
                             </a>
+                            <Link
+                              href={`/projects/${slide.slug}`}
+                              className="btn btn-ghost btn-xs inline-flex items-center px-3 py-1.5 text-sm transition-colors duration-200"
+                              aria-label={`View detailed information about ${slide.title}`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-3 w-3 mr-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              Details
+                            </Link>
                           </div>
                         </div>
                         
