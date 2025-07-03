@@ -2,10 +2,96 @@ import { PROJECT_DETAILS } from '@/data/projectDetails';
 import Link from 'next/link';
 import { pt_sans } from '@/app/fonts';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+// SEO Metadata for projects listing page
+export const metadata: Metadata = {
+  title: 'Projects | Alfian\'s Portfolio - Full Stack Developer',
+  description: 'Explore my portfolio of web development projects including full-stack applications, API systems, e-commerce platforms, and modern frontend solutions. Built with Next.js, React, Python Flask, Laravel, and more.',
+  keywords: [
+    'web development projects',
+    'full stack developer portfolio',
+    'Next.js projects',
+    'React applications',
+    'Python Flask API',
+    'Laravel projects',
+    'e-commerce platform',
+    'banking system API',
+    'sustainable technology',
+    'mobile-first design'
+  ],
+  openGraph: {
+    title: 'Projects | Alfian\'s Portfolio',
+    description: 'Explore my portfolio of web development projects including full-stack applications, API systems, and modern frontend solutions.',
+    url: '/projects',
+    siteName: 'Alfian\'s Portfolio',
+    images: [
+      {
+        url: '/portfolio-page-hero-transparent.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Alfian\'s Portfolio Projects',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects | Alfian\'s Portfolio',
+    description: 'Explore my portfolio of web development projects including full-stack applications and API systems.',
+    images: ['/portfolio-page-hero-transparent.webp'],
+  },
+  alternates: {
+    canonical: '/projects',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 export default function ProjectsPage() {
+  // Generate structured data for the projects portfolio
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Alfian's Web Development Projects",
+    "description": "Portfolio of web development projects including full-stack applications, API systems, and modern frontend solutions",
+    "url": "https://yoursite.com/projects", // Replace with actual domain
+    "numberOfItems": PROJECT_DETAILS.length,
+    "itemListElement": PROJECT_DETAILS.map((project, index) => ({
+      "@type": "CreativeWork",
+      "position": index + 1,
+      "name": project.title,
+      "description": project.description,
+      "image": project.image,
+      "url": `https://yoursite.com/projects/${project.slug}`, // Replace with actual domain
+      "programmingLanguage": project.techStack,
+      "sameAs": [
+        project.githubLink,
+        ...(project.projectLink ? [project.projectLink] : [])
+      ]
+    }))
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+      
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h1 className={`text-4xl lg:text-6xl font-bold mb-4 ${pt_sans.className}`}>

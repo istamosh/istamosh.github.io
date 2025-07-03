@@ -6,7 +6,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
     slug: "sustainable-community-market",
     image: "/sustainable_community_market_fe.png",
     title: "Sustainable Community Market",
-    description: "A group final project about e-commerce-like platform that encourages sustainability lifestyle and enable users to act as both seller, buyer, and expedition. Selling ranged from upcycled products to near-expiry goods within local area. Created using NextJS and Leaflet",
+    description: "A group final project about e-commerce-like platform that encourages sustainability lifestyle and enable users to act as both seller, buyer, and expedition. Selling ranged from upcycled products to near-expiry goods within local area. Created using Next.js and Leaflet",
     projectLink: "https://sustainable-community-market-fe.vercel.app/team",
     githubLink: "https://github.com/alfifrr/sustainable-community-market-fe",
     techStack: ["Next", "Typescript"],
@@ -16,14 +16,14 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       objectives: [
         "Create a user-friendly platform for sustainable product trading",
         "Implement geolocation features for local community focus",
-        "Develop a multi-role system (seller, buyer, expedition)",
+        "Develop a multi-role system (seller, buyer, expedition, and admin)",
         "Integrate mapping functionality for local delivery",
         "Build responsive design for all device types"
       ],
       techStackDetails: {
-        frontend: ["Next.js 14", "TypeScript", "Tailwind CSS", "React Hook Form"],
-        backend: ["Python Flask", "SQLAlchemy", "PostgreSQL"],
-        tools: ["Leaflet.js", "Vercel", "Git", "Figma"],
+        frontend: ["Next.js 14 & TypeScript", "Tailwind & DaisyUI", 'Axios', 'Zustand' ],
+        backend: ["Python 3.11", 'Flask', "SQLAlchemy", 'Flask-Migrate', "PostgreSQL", 'Bcrypt', 'JWT', 'Flask-Mail', 'Swagger', 'Psycopg2'],
+        tools: ["Leaflet.js", "Vercel", "Git"],
         deployment: ["Vercel (Frontend)", "Render (Backend)", "Supabase (Database)"]
       }
     },
@@ -46,11 +46,14 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
     },
     results: {
       outcomes: [
-        "Successfully deployed functional e-commerce platform",
+        "Successfully deployed MVP within 2 weeks",
+        "Deployed functional e-commerce platform",
         "Implemented complete user journey from registration to purchase",
+        "Implemented complete seller journey from registration to selling",
         "Created intuitive admin panel for product management",
         "Achieved responsive design across desktop, tablet, and mobile",
-        "Integrated real-time mapping for local delivery coordination"
+        "Integrated real-time mapping for local delivery coordination",
+        "Team received the best feature implementation (Geolocation and product status handling feature)",
       ],
       achievements: [
         "Delivered as final capstone project for RevoU Full Stack Software Engineering program",
@@ -62,17 +65,18 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       screenshots: ["/sustainable_community_market_fe.png"]
     },
     responsibilities: {
-      role: "Frontend Developer & UI/UX Designer",
+      role: "Full Stack Developer, Group Leader",
       scope: [
-        "Frontend architecture and component development",
-        "UI/UX design and responsive implementation",
+        "Responsible for backend implementation and API documentation",
+        "UI/UX design, mobile-first, and responsive implementation",
         "API integration and state management",
         "Map integration using Leaflet.js",
         "User authentication and authorization flows",
+        "Collaborating on the product checkout flows",
         "Performance optimization and deployment"
       ],
-      teamSize: 4,
-      duration: "8 weeks (Full-time capstone project)"
+      teamSize: 3,
+      duration: "3 weeks (Full-time capstone project)"
     }
   },
   {
@@ -95,10 +99,10 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Deploy to production with proper error handling"
       ],
       techStackDetails: {
-        backend: ["Python 3.11", "Flask", "Flask-SQLAlchemy", "Flask-Migrate"],
+        backend: ["Python 3.11", 'Flask', "SQLAlchemy", 'Flask-Migrate', "PostgreSQL", 'Bcrypt', 'JWT', 'Flask-Mail', 'Swagger', 'Psycopg2'],
         database: ["PostgreSQL", "Supabase"],
-        tools: ["Swagger/OpenAPI", "Postman", "Git"],
-        deployment: ["Render", "Supabase", "Docker"]
+        tools: ["Swagger / OpenAPI", "Postman / Insomnia", "Git"],
+        deployment: ["Render", "Supabase"]
       }
     },
     methodology: {
@@ -124,7 +128,8 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Implemented secure authentication and authorization system",
         "Created scalable database schema supporting complex e-commerce operations",
         "Achieved seamless integration with frontend application",
-        "Established proper error handling and validation throughout the system"
+        "Established proper error handling and validation throughout the system",
+        "Implemented extra feature for sustainable product certification and geolocation support"
       ],
       achievements: [
         "Successfully designed and implemented complete backend architecture",
@@ -136,7 +141,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       screenshots: ["/sustainable_community_market.png"]
     },
     responsibilities: {
-      role: "Backend Developer & API Architect",
+      role: "Full Stack Developer, Group Leader",
       scope: [
         "Complete backend architecture design and implementation",
         "Database schema design and optimization",
@@ -145,8 +150,8 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Authentication and authorization system implementation",
         "Production deployment and configuration management"
       ],
-      teamSize: 4,
-      duration: "6 weeks (Backend development phase)"
+      teamSize: 3,
+      duration: "2 weeks (Backend development phase)"
     }
   },
   {
@@ -165,13 +170,13 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Build a complete banking system with core financial operations",
         "Implement multi-account management for users",
         "Create secure transaction processing with proper validation",
-        "Develop budgeting and financial management features",
+        "Develop budgeting, bill payments, and other financial management features",
         "Ensure production-ready deployment with Docker containerization"
       ],
       techStackDetails: {
-        backend: ["Python 3.11", "Flask", "Flask-SQLAlchemy", "Flask-JWT-Extended"],
+        backend: ["Python 3.11", "Flask", "Flask-SQLAlchemy", "Flask-JWT-Extended", 'Flask-Limiter', 'Flask-Mail', 'Flask-Migrate', 'Swagger', 'Psycopg2'],
         database: ["PostgreSQL", "Supabase"],
-        tools: ["Docker", "Swagger/OpenAPI", "Postman"],
+        tools: ["Docker", "Swagger / OpenAPI", "Postman / Insomnia"],
         deployment: ["Render", "Docker Hub", "Supabase"]
       }
     },
@@ -186,7 +191,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       ],
       solution: "Developed a full-featured banking API with secure authentication, multi-account support, transaction processing, budgeting tools, and comprehensive financial operations with proper security measures and audit logging.",
       metrics: [
-        "40+ banking-specific API endpoints",
+        "25+ banking-specific API endpoints",
         "Multi-layer security implementation",
         "Complete transaction audit trail system",
         "Docker containerization with 99% uptime"
@@ -197,7 +202,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Successfully deployed comprehensive banking API system",
         "Implemented secure multi-account management functionality",
         "Created complete transaction processing with proper validation",
-        "Developed budgeting and financial planning features",
+        "Developed budgeting, bill transactions, and other financial planning features",
         "Achieved production deployment with Docker containerization"
       ],
       achievements: [
@@ -211,7 +216,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       screenshots: ["/banking_system.png"]
     },
     responsibilities: {
-      role: "Full Stack Developer & System Architect",
+      role: "Backend",
       scope: [
         "Complete system architecture design and implementation",
         "Banking business logic and financial calculations",
@@ -220,7 +225,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Docker containerization and deployment automation",
         "Comprehensive API documentation and testing"
       ],
-      duration: "10 weeks (Individual project)"
+      duration: "3 weeks (Individual project)"
     }
   },
   {
@@ -233,7 +238,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
     githubLink: "https://github.com/istamosh/laravel-react-fullstack",
     techStack: ["Typescript", "ReactIcon"],
     detailedBackground: {
-      overview: "Mosphere is a full-stack web application that combines React TypeScript frontend with Laravel backend to create a content management platform where users can create, edit, and publish Markdown-powered posts with administrative oversight.",
+      overview: "Mosphere is a full-stack web application that combines React TypeScript frontend with Laravel backend to create a content management platform where users can create, edit, and publish their own Markdown-powered posts with administrative oversight.",
       problem: "There was a need for a modern content management system that supports Markdown editing, user authentication, and administrative controls while providing a seamless user experience across different devices.",
       objectives: [
         "Create a modern content management system with Markdown support",
@@ -243,10 +248,10 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "Deploy to production hosting environment"
       ],
       techStackDetails: {
-        frontend: ["React 18", "TypeScript", "Tailwind CSS", "React Router"],
-        backend: ["Laravel 10", "PHP 8.2", "MySQL", "Laravel Sanctum"],
-        tools: ["Markdown Parser", "Hostinger", "Git", "Composer", "npm"],
-        deployment: ["Hostinger Shared Hosting", "MySQL Database"]
+        frontend: ["Vite & React 18", "TypeScript", "Tailwind & Flowbite", "React Router DOM", 'React Markdown', 'React Icons', 'Axios'],
+        backend: ["Laravel", "PHP 8.2", "MySQL", "Laravel Sanctum"],
+        tools: ["Markdown Parser", "Hostinger", "Git"],
+        deployment: ["Hostinger", "MySQL Database"]
       }
     },
     methodology: {
@@ -285,7 +290,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       screenshots: ["/mosphere.png"]
     },
     responsibilities: {
-      role: "Full Stack Developer",
+      role: "Full Stack",
       scope: [
         "Complete application architecture and development",
         "React TypeScript frontend development",
@@ -294,7 +299,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
         "User authentication and authorization system",
         "Production deployment and hosting configuration"
       ],
-      duration: "12 weeks (Personal project)"
+      duration: "5 weeks (Personal project)"
     }
   }
 ];

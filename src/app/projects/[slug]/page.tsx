@@ -29,13 +29,61 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
+  // Generate keywords based on project tech stack and content
+  const techKeywords = project.techStack?.join(', ') || '';
+  const projectKeywords = [
+    project.title.toLowerCase(),
+    'web development project',
+    'full stack development',
+    techKeywords,
+    project.responsibilities.role.toLowerCase(),
+    'portfolio project'
+  ].filter(Boolean);
+
   return {
-    title: `${project.title} | Alfian's Portfolio`,
-    description: project.description,
+    title: `${project.title} | Alfian's Portfolio - ${project.responsibilities.role}`,
+    description: `${project.description.slice(0, 155)}...`,
+    keywords: projectKeywords,
     openGraph: {
-      title: project.title,
+      title: `${project.title} | Alfian's Portfolio`,
       description: project.description,
+      url: `/projects/${project.slug}`,
+      siteName: 'Alfian\'s Portfolio',
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+      publishedTime: '2024-01-01T00:00:00.000Z', // You can make this dynamic
+      authors: ['Alfian'],
+      section: 'Projects',
+      tags: project.techStack,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.description.slice(0, 200),
       images: [project.image],
+      creator: '@your_twitter_handle', // Replace with actual handle
+    },
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
@@ -48,8 +96,48 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  // Generate structured data for the project
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.description,
+    "image": project.image,
+    "url": `https://yoursite.com/projects/${project.slug}`, // Replace with actual domain
+    "author": {
+      "@type": "Person",
+      "name": "Alfian",
+      "url": "https://yoursite.com" // Replace with actual domain
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Alfian"
+    },
+    "dateCreated": "2024-01-01", // You can make this dynamic based on project data
+    "programmingLanguage": project.techStack,
+    "applicationCategory": "Web Application",
+    "operatingSystem": "Cross-platform",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "sameAs": [
+      project.githubLink,
+      ...(project.projectLink ? [project.projectLink] : [])
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-base-100">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       {/* Hero Section */}
       <div className="relative h-96 bg-gradient-to-br from-primary/20 to-secondary/20">
         <div className="absolute inset-0 bg-black/20"></div>
