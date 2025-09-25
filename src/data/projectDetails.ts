@@ -387,6 +387,93 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
       ],
       duration: "5 weeks (Personal project)"
     }
+  },
+  {
+    id: 6,
+    slug: "tiketq-smart-booking-dashboard",
+    image: "/tiketq_logo.webp",
+    title: "TiketQ Smart Booking Dashboard",
+    description: "A comprehensive virtual internship project developing a multi-modal ticketing and PPOB bill payment platform. Built scalable dashboard interfaces for transaction management with FastAPI backend, PostgreSQL database, and Midtrans payment gateway integration.",
+    githubLink: "https://github.com/confidential", // NDA - Repository not available for public viewing
+    techStack: ["Next", "FastAPI", "PostgreSQL"],
+    detailedBackground: {
+      overview: "TiketQ Smart Booking Dashboard is a comprehensive platform developed during a virtual internship program with RevoU x VI Partners. The project focuses on managing multi-modal ticketing services and PPOB (Payment Point Online Bank) bill payments through a scalable, data-driven dashboard interface.",
+      problem: "The travel and utility payment industry requires a unified platform that can handle multiple service types including transportation bookings (plane, ferry, train) and utility payments. There was a need for a robust dashboard that could manage high-volume transactions while maintaining excellent user experience and administrative oversight.",
+      objectives: [
+        "Develop a comprehensive dashboard for multi-modal ticketing services",
+        "Create seamless transaction flows for various payment types",
+        "Implement robust payment gateway integration with Midtrans",
+        "Build scalable backend services with FastAPI and PostgreSQL",
+        "Ensure optimal UI/UX alignment with provided Figma designs",
+        "Deliver fault-tolerant payment workflows with minimal latency"
+      ],
+      techStackDetails: {
+        frontend: ["Next.js 14", "TypeScript", "Tailwind CSS", "UI components from Figma designs"],
+        backend: ["FastAPI", "Python", "SQLAlchemy", "Pydantic"],
+        database: ["PostgreSQL", "Database optimization"],
+        tools: ["Docker", "Swagger", "Git", "Midtrans Payment Gateway", "JSON testing tools"],
+        deployment: ["Docker containerization", "Agile methodology"]
+      }
+    },
+    methodology: {
+      strategy: "Agile team framework with emphasis on iterative development, comprehensive testing, and seamless integration between frontend dashboard interfaces and backend transaction processing systems.",
+      approach: [
+        "Agile development with sprints, daily stand-ups, and iterative feedback",
+        "UI/UX development based on provided Figma designs and asset libraries",
+        "FastAPI backend development with PostgreSQL database management",
+        "Docker containerization for consistent development environments",
+        "Comprehensive JSON testing for API validation and reliability",
+        "End-to-end transaction process engineering with payment gateway integration"
+      ],
+      solution: "Developed a complete dashboard platform with optimized user and admin interfaces, featuring loginless transaction creation, order tracking, and integrated payment processing through Midtrans gateway, supporting multiple service types with high-volume transactional capability.",
+      metrics: [
+        "Minimal transaction errors through optimized workflows",
+        "High-volume transactional data support",
+        "Minimized latency in API calls and database operations",
+        "Comprehensive end-to-end transaction processing",
+        "Seamless multi-modal service integration"
+      ]
+    },
+    results: {
+      outcomes: [
+        "Delivered optimized user and admin dashboard interfaces with smooth transaction management",
+        "Engineered complete end-to-end transaction processes with loginless capabilities",
+        "Successfully integrated Midtrans payment gateway for enhanced payment efficiency",
+        "Implemented order fetching and tracking systems across multiple service types",
+        "Improved transaction processing workflow for plane, ferry, train bookings, and utility payments",
+        "Achieved streamlined API calls and database management for high-volume operations"
+      ],
+      achievements: [
+        "Successfully completed virtual internship program with RevoU x VI Partners",
+        "Demonstrated proficiency in full-stack development with modern technologies",
+        "Built production-ready dashboard supporting multiple transaction types",
+        "Achieved reliable and intuitive user experience across all platform features",
+        "Contributed to fault-tolerant payment workflows with optimized performance"
+      ],
+      impact: "The TiketQ Smart Booking Dashboard demonstrates capability to build enterprise-level transaction management systems, showcasing skills in payment gateway integration, database optimization, and scalable dashboard development for real-world business applications.",
+      screenshots: [
+        "/tiketq_0.webp",
+        "/tiketq_1.webp", 
+        "/tiketq_2.webp",
+        "/tiketq_3.webp",
+        "/tiketq_4.webp"
+      ]
+    },
+    responsibilities: {
+      role: "Software Engineer Associate",
+      scope: [
+        "Designed and implemented frontend dashboard elements with intuitive navigation",
+        "Ensured responsive design for both user and administrator interfaces",
+        "Integrated multiple backend APIs with rigorous testing protocols",
+        "Maintained transaction robustness and data integrity throughout the system",
+        "Managed core transaction service features including payment gateway integration",
+        "Implemented order processing and tracking functionalities",
+        "Oversaw database maintenance and optimization for smooth operations",
+        "Developed fault-tolerant payment workflows supporting high transaction volumes"
+      ],
+      teamSize: 5,
+      duration: "2 months (August - September 2025)"
+    }
   }
 ];
 

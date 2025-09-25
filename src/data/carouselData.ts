@@ -60,4 +60,14 @@ export const SLIDES: CarouselSlide[] = [
     githubLink: "https://github.com/istamosh/laravel-react-fullstack",
     techStack: ["Typescript", 'ReactIcon']
   },
+  {
+    id: 6,
+    slug: "tiketq-smart-booking-dashboard",
+    image: "/tiketq_logo.webp",
+    title: "TiketQ Smart Booking Dashboard",
+    description:
+      "A comprehensive virtual internship project developing a multi-modal ticketing and PPOB bill payment platform. Built scalable dashboard interfaces for transaction management with FastAPI backend, PostgreSQL database, and Midtrans payment gateway integration.",
+    githubLink: "https://github.com/confidential", // NDA - Repository not available for public viewing
+    techStack: ["Next", "FastAPI", "PostgreSQL"]
+  }
 ];
