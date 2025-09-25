@@ -67,7 +67,7 @@ export const SLIDES: CarouselSlide[] = [
     title: "TiketQ Smart Booking Dashboard",
     description:
       "A comprehensive virtual internship project developing a multi-modal ticketing and PPOB bill payment platform. Built scalable dashboard interfaces for transaction management with FastAPI backend, PostgreSQL database, and Midtrans payment gateway integration.",
-    githubLink: "https://github.com/confidential", // NDA - Repository not available for public viewing
+    // githubLink removed due to NDA
     techStack: ["Next", "FastAPI", "PostgreSQL"]
   }
 ];

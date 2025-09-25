@@ -5,7 +5,7 @@ export type CarouselSlide = {
   title: string;
   description: string;
   projectLink?: string;
-  githubLink: string;
+  githubLink?: string; // Made optional to handle NDA projects
   githubLinks?: { // Optional array for multiple GitHub repositories
     frontend?: string;
     backend?: string;

@@ -394,7 +394,7 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
     image: "/tiketq_logo.webp",
     title: "TiketQ Smart Booking Dashboard",
     description: "A comprehensive virtual internship project developing a multi-modal ticketing and PPOB bill payment platform. Built scalable dashboard interfaces for transaction management with FastAPI backend, PostgreSQL database, and Midtrans payment gateway integration.",
-    githubLink: "https://github.com/confidential", // NDA - Repository not available for public viewing
+    // githubLink removed due to NDA restrictions
     techStack: ["Next", "FastAPI", "PostgreSQL"],
     detailedBackground: {
       overview: "TiketQ Smart Booking Dashboard is a comprehensive platform developed during a virtual internship program with RevoU x VI Partners. The project focuses on managing multi-modal ticketing services and PPOB (Payment Point Online Bank) bill payments through a scalable, data-driven dashboard interface.",
