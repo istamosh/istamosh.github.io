@@ -6,6 +6,11 @@ export type CarouselSlide = {
   description: string;
   projectLink?: string;
   githubLink: string;
+  githubLinks?: { // Optional array for multiple GitHub repositories
+    frontend?: string;
+    backend?: string;
+    fullstack?: string;
+  };
   techStack?: string[]; // Array of tech stack icon names
 };
 

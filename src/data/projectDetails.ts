@@ -230,6 +230,92 @@ export const PROJECT_DETAILS: ProjectDetails[] = [
   },
   {
     id: 4,
+    slug: "werent-clothing-rental-platform",
+    image: "/werent.webp",
+    title: "WeRent - Sustainable Clothing Rental Platform",
+    description: "A collaborative MVP project for sustainable clothing rental platform promoting eco-friendly fashion consumption. Led as Project Manager while contributing as Software Engineer, delivering comprehensive rental workflow with user authentication, inventory management, and review systems.",
+    projectLink: "https://werent-backend-api.onrender.com/docs/",
+    githubLink: "https://github.com/alfifrr/werent-backend", // Primary repository (backend)
+    githubLinks: {
+      frontend: "https://github.com/thegoner24/werent-frontend",
+      backend: "https://github.com/alfifrr/werent-backend"
+    },
+    techStack: ["Next", "Flask", "Supabase"],
+    detailedBackground: {
+      overview: "WeRent is a sustainable clothing rental platform developed during RevoU bootcamp, designed to promote eco-friendly fashion consumption through an online marketplace. The project focused on creating a scalable MVP that addresses user needs in rental services while emphasizing seamless user experience and operational efficiency.",
+      problem: "The fashion industry is one of the largest polluters globally, with fast fashion contributing significantly to waste. There was a need for a platform that promotes sustainable fashion consumption through clothing rental services, reducing waste while making fashion more accessible and affordable.",
+      objectives: [
+        "Build a comprehensive clothing rental platform with sustainable focus",
+        "Implement complete user rental workflow with authentication",
+        "Create inventory management system for clothing items",
+        "Develop user profiles with image upload capabilities",
+        "Build review and rating system for rental items",
+        "Implement penalty handling for rental due dates"
+      ],
+      techStackDetails: {
+        frontend: ["Next.js 14", "TypeScript", "Tailwind CSS"],
+        backend: ["Flask", "Python", "SQLAlchemy"],
+        database: ["Supabase", "PostgreSQL"],
+        tools: ["Swagger", "Notion", "Git", "Agile methodology"],
+        deployment: ["Vercel", "Supabase"]
+      }
+    },
+    methodology: {
+      strategy: "Agile development approach with comprehensive project management, focusing on sprint planning, task delegation, and iterative reviews to maintain steady progress and adaptability throughout the development cycle.",
+      approach: [
+        "Agile development practices with sprint planning and iterative reviews",
+        "Comprehensive PRD documentation for precise feature implementation",
+        "Notion-based task management for frontend and backend synchronization",
+        "Detailed project diagrams defining workflows and system architecture",
+        "Cross-functional collaboration with enhanced team visibility",
+        "Quality assurance processes throughout development lifecycle"
+      ],
+      solution: "Implemented a full-stack rental platform with robust user authentication, comprehensive inventory management, bulk renting capabilities, user profiles with image uploads, review systems, and penalty handling for overdue rentals.",
+      metrics: [
+        "MVP delivered 10% ahead of schedule",
+        "Complete user rental workflow implementation",
+        "Robust penalty handling system",
+        "Full-featured inventory management",
+        "Comprehensive user authentication and authorization"
+      ]
+    },
+    results: {
+      outcomes: [
+        "Successfully delivered MVP 10% ahead of initially planned schedule",
+        "Integrated comprehensive user authentication and authorization system",
+        "Implemented complete inventory management for clothing items",
+        "Developed bulk renting capabilities for enhanced user experience",
+        "Created user profiles with image upload functionality",
+        "Built comprehensive review and rating system",
+        "Achieved fully functional rental workflow with penalty handling"
+      ],
+      achievements: [
+        "Demonstrated effective project management and leadership skills",
+        "Successfully coordinated frontend and backend development teams",
+        "Delivered all features meeting quality benchmarks and business goals",
+        "Positioned platform for further development and potential launch",
+        "Showcased proficiency in both management and technical implementation"
+      ],
+      impact: "The WeRent platform demonstrates how technology can promote sustainable fashion consumption, reducing environmental impact while providing accessible and affordable fashion rental services to users.",
+      screenshots: ["/werent.webp"]
+    },
+    responsibilities: {
+      role: "Project Manager, Software Engineer Associate",
+      scope: [
+        "Led coordination of frontend and backend development activities",
+        "Managed project tasks and ensured cross-team alignment using Notion",
+        "Provided hands-on technical support during development phases",
+        "Overcame technical challenges and integrated complex features",
+        "Maintained quality assurance processes throughout development",
+        "Ensured feature completeness and system functionality",
+        "Created project diagrams and workflow documentation"
+      ],
+      teamSize: 7,
+      duration: "2 months (July - August 2025)"
+    }
+  },
+  {
+    id: 5,
     slug: "mosphere-fullstack",
     image: "/mosphere.png",
     title: "Mosphere",

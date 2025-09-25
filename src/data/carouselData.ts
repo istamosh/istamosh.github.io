@@ -36,6 +36,21 @@ export const SLIDES: CarouselSlide[] = [
   },
   {
     id: 4,
+    slug: "werent-clothing-rental-platform",
+    image: "/werent.webp",
+    title: "WeRent - Sustainable Clothing Rental Platform",
+    description:
+      "A collaborative MVP project for sustainable clothing rental platform promoting eco-friendly fashion consumption. Led as Project Manager while contributing as Software Engineer, delivering comprehensive rental workflow with user authentication, inventory management, and review systems.",
+    projectLink: "https://werent-backend-api.onrender.com/docs/",
+    githubLink: "https://github.com/alfifrr/werent-backend",
+    githubLinks: {
+      frontend: "https://github.com/thegoner24/werent-frontend",
+      backend: "https://github.com/alfifrr/werent-backend"
+    },
+    techStack: ["Next", "Flask", "Supabase"]
+  },
+  {
+    id: 5,
     slug: "mosphere-fullstack",
     image: "/mosphere.png",
     title: "Mosphere",
